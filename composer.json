@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dominios/alien-framework"
+        }
+    ],
+    "require": {
+        "alien/framework": "dev-master"
+    }
+}
