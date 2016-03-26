@@ -2,7 +2,8 @@
 
 use Application\Application;
 
-require_once __DIR__ . '/../alien/init.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader->add('Application\\', __DIR__ . '\\..\\module');
 
 try {
 
