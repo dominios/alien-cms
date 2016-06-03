@@ -6,6 +6,7 @@
         }
     ],
     "require": {
-        "alien/framework": "dev-master"
+        "alien/framework": "dev-master",
+        "morris/microdb": "*"
     }
 }
