@@ -3,13 +3,24 @@
 namespace Application\Controllers\Rest;
 
 use Alien\Rest\BaseRestfulController;
+use MicroDB\Database;
 
 class NavController extends BaseRestfulController
 {
 
-    private function getStorageFileName()
+    /**
+     * @var Database
+     */
+    protected $db;
+
+    public function __construct(Database $database)
     {
-        return 'navigation.serialized';
+        parent::__construct();
+        $this->db = $database;
+
+        if (!$this->db->exists(1)) {
+            $this->db->create($this->getFakeContent());
+        }
     }
 
     protected function getFakeContent()
@@ -20,20 +31,28 @@ class NavController extends BaseRestfulController
                 'label' => 'link'
             ],
             [
-                'link2' => '#link2',
+                'link' => '#link2',
                 'label' => 'link2'
+            ],
+            [
+                'link' => '#link3',
+                'label' => 'link4'
+            ],
+            [
+                'link' => '#link4',
+                'label' => 'link5'
+            ],
+            [
+                'link' => '#link5',
+                'label' => 'link5'
             ]
         ];
     }
 
     public function listAction()
     {
-        /* @var $fs \Alien\Filesystem\Filesystem */
-        $fs = $this->getServiceLocator()->get('NavbarStorage');
-        $file = $fs->get($this->getStorageFileName());
-        $content = unserialize($file->getFileContent());
-        $file->close();
-        return $this->dataResponse($content);
+        $data = $this->db->load(1);
+        return $this->dataResponse($data);
     }
 
     public function patchAction()

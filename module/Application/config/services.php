@@ -27,9 +27,26 @@ return [
             $path = [__DIR__, '..', '..', '..', 'storage'];
             return new \Alien\Filesystem\Filesystem(realpath(implode(DIRECTORY_SEPARATOR, $path)));
         },
-        'NavbarStorage' => function () {
-            $path = [__DIR__, '..', '..', '..', 'storage', 'navigation'];
-            return new \Alien\Filesystem\Filesystem(realpath(implode(DIRECTORY_SEPARATOR, $path)));
+        'NavigationDb' => function () {
+            $path = (implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'storage', 'navigation']));
+            return new \MicroDB\Database($path);
+        },
+        '\Application\Controllers\IndexController' => function (\Alien\Di\ServiceLocator $sl) {
+            $ctrl = new \Application\Controllers\IndexController();
+            $ctrl->setServiceLocator($sl);
+            return $ctrl;
+        },
+        '\Application\Controllers\Rest\NavController' => function (\Alien\Di\ServiceLocator $sl) {
+            $db = $sl->get('NavigationDb');
+            /* @var $db \MicroDB\Database */
+            $ctrl = new Application\Controllers\Rest\NavController($db);
+            $ctrl->setServiceLocator($sl);
+            return $ctrl;
+        },
+        '\Application\Controllers\Rest\TextController' => function (\Alien\Di\ServiceLocator $sl) {
+            $ctrl = new Application\Controllers\Rest\TextController();
+            $ctrl->setServiceLocator($sl);
+            return $ctrl;
         }
     ]
 

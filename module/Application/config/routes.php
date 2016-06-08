@@ -1,10 +1,10 @@
 <?php
 
-return array(
-    '' => array(
+return [
+    '' => [
         'route' => '/',
         'controller' => 'IndexController',
-        'namespace' => 'Application\Controllers',
+        'namespace' => '\Application\Controllers',
         'action' => 'index',
-    ),
-);
+    ],
+];

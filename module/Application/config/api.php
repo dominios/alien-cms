@@ -14,7 +14,7 @@ return [
                     'navs' => [
                         'route' => '/navs[/:id][/:method]',
                         'namespace' => '',
-                        'controller' => 'Application\Controllers\Rest\NavController',
+                        'controller' => '\Application\Controllers\Rest\NavController',
                         'action' => 'rest',
                         'defaults' => [
                             'method' => 'list',
@@ -23,7 +23,7 @@ return [
                     'texts' => [
                         'route' => '/texts[/:id][/:method]',
                         'namespace' => '',
-                        'controller' => 'Application\Controllers\Rest\TextController',
+                        'controller' => '\Application\Controllers\Rest\TextController',
                         'action' => 'rest',
                         'defaults' => [
                             'method' => 'list',

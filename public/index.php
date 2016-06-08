@@ -3,7 +3,7 @@
 use Application\Application;
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->add('Application\\', __DIR__ . '\\..\\module');
+$loader->add('Application', implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'module']));
 
 try {
 
@@ -22,6 +22,7 @@ try {
 
 } catch (\Exception $e) {
     header("Content-Type: text/html; charset=UTF8");
+    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
     echo "<h1>Internal Server Error</h1>";
     echo "<strong>" . get_class($e) . ": " . $e->getMessage() . "</strong> at <strong>" . $e->getFile() . "</strong> on line <strong>" . $e->getLine() . "</strong>";
     echo "<h2>Stack trace:</h2>";

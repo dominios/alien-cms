@@ -22,7 +22,7 @@ class Application extends \Alien\Application
     {
 
         Debugger::enable();
-        Debugger::$strictMode = TRUE;
+        Debugger::$strictMode = false;
 
         $this->router = $this->getServiceLocator()->get('Router');
 
@@ -35,9 +35,9 @@ class Application extends \Alien\Application
         }
 
         $controllerClass = $route->getControllerClass();
+        $controllerClass = str_replace('\\\\', '\\', $controllerClass);
         /* @var $controller AbstractController */
-        $controller = new $controllerClass;
-        $controller->setServiceLocator($this->getServiceLocator());
+        $controller = $this->getServiceLocator()->get($controllerClass);
         $controller->setRequest($this->getRequest());
         $controller->setRoute($route);
         $controller->addAction($route->getAction());
