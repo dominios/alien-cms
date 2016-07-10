@@ -9,7 +9,7 @@ class NavigationComponent extends \Alien\Mvc\Component\NavigationComponent {
     public function cmsRender()
     {
         ?>
-            <nav ng-controller="navbarCtrl">
+            <nav ng-controller="navigationCtrl">
                 <div>
                     <button class="btn btn-primary" ng-show="!isEditing" ng-click="setToEditMode();">
                         <i class="fa fa-pencil"></i> Začať úpravy

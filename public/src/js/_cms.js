@@ -2,7 +2,9 @@
 
 angular.module('AlienCms', [
     'ngResource',
-    'notifications'
+    'notifications',
+    'AlienCms.navigation',
+    'AlienCms.text'
 ]).directive('ckEditor', [function () {
     return {
         require: '?ngModel',

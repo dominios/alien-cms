@@ -1,82 +1,101 @@
-app.controller('navbarCtrl', function ($scope, $notification, NavbarApi) {
+angular.module('AlienCms.navigation', [])
 
-    NavbarApi.list().$promise.then(function (response) {
-        $scope.links = response['data'];
-        $scope.tempLinks = angular.copy($scope.links);
-    });
-
-    $scope.isEditing = false;
-    $scope.isLinkEditing = false;
-    $scope.editingLink = {};
-    $scope.tempEditingLink = {};
-    $scope.tempLinks = angular.copy($scope.links);
-
-    var cancelEditing = function () {
-        $scope.isEditing = false;
-        $scope.isLinkEditing = false;
-        $scope.links = angular.copy($scope.tempLinks);
-        $scope.editingLink = {};
-    };
-
-    var startEditing = function () {
-        $scope.isEditing = true;
-        $scope.tempLinks = angular.copy($scope.links);
-    };
-
-    var startLinkEditing = function () {
-        startEditing();
-        $scope.isLinkEditing = true;
-    }
-
-    var cancelLinkEditing = function () {
-        $scope.isLinkEditing = false;
-        $scope.editingLink = {};
-    }
-
-    $scope.createNewLink = function () {
-        var newLink = {
-            'link': '#',
-            'label': 'nový link'
-        };
-        $scope.links.push(newLink);
-        $scope.editLink(newLink);
-    };
-
-    $scope.setToEditMode = function () {
-        startEditing();
-    };
-
-    $scope.cancelEditMode = function () {
-        cancelEditing();
-    };
-
-    $scope.saveEditing = function () {
-        $scope.tempLinks = angular.copy($scope.links);
-        cancelEditing();
-        NavbarApi.update($scope.links);
-        $notification.success("Úspech!", "Zmeny boli úspešne uložené.");
-    };
-
-    $scope.editLink = function (link) {
-        if(link !== $scope.editingLink) {
-            cancelLinkEditing();
+    .service('NavigationApi', ['$resource',
+        function ($resource) {
+            return $resource('api/v1/navs/:id/:method', {
+                id: '@id',
+                method: '@method'
+            }, {
+                list: {method: 'GET'},
+                update: {method: 'PATCH'},
+                create: {method: 'PUT'},
+                delete: {method: 'DELETE'}
+            });
         }
-        startLinkEditing();
-        $scope.editingLink = link;
-    };
+    ])
 
-    $scope.saveLinkEdit = function () {
-        $scope.tempLinks = angular.copy($scope.links);
-        cancelLinkEditing();
-    };
+    .controller('navigationCtrl', ['$scope', '$notification', 'NavigationApi',
+        function ($scope, $notification, NavigationApi) {
 
-    $scope.cancelLinkEdit = function () {
-        cancelLinkEditing();
-    };
+            NavigationApi.list().$promise.then(function (response) {
+                $scope.links = response['data'];
+                $scope.tempLinks = angular.copy($scope.links);
+            });
 
-    $scope.deleteLink = function () {
-        $scope.links.splice($scope.links.indexOf($scope.editingLink), 1);
-        $scope.saveLinkEdit();
-    };
+            $scope.isEditing = false;
+            $scope.isLinkEditing = false;
+            $scope.editingLink = {};
+            $scope.tempEditingLink = {};
+            $scope.tempLinks = angular.copy($scope.links);
 
-});
+            var cancelEditing = function () {
+                $scope.isEditing = false;
+                $scope.isLinkEditing = false;
+                $scope.links = angular.copy($scope.tempLinks);
+                $scope.editingLink = {};
+            };
+
+            var startEditing = function () {
+                $scope.isEditing = true;
+                $scope.tempLinks = angular.copy($scope.links);
+            };
+
+            var startLinkEditing = function () {
+                startEditing();
+                $scope.isLinkEditing = true;
+            };
+
+            var cancelLinkEditing = function () {
+                $scope.isLinkEditing = false;
+                $scope.editingLink = {};
+            };
+
+            $scope.createNewLink = function () {
+                var newLink = {
+                    'link': '#',
+                    'label': 'nový link'
+                };
+                $scope.links.push(newLink);
+                $scope.editLink(newLink);
+            };
+
+            $scope.setToEditMode = function () {
+                startEditing();
+            };
+
+            $scope.cancelEditMode = function () {
+                cancelEditing();
+            };
+
+            $scope.saveEditing = function () {
+                $scope.tempLinks = angular.copy($scope.links);
+                cancelEditing();
+                NavigationApi.update($scope.links);
+                $notification.success("Úspech!", "Zmeny boli úspešne uložené.");
+            };
+
+            $scope.editLink = function (link) {
+                if (link !== $scope.editingLink) {
+                    cancelLinkEditing();
+                }
+                startLinkEditing();
+                $scope.editingLink = link;
+            };
+
+            $scope.saveLinkEdit = function () {
+                $scope.tempLinks = angular.copy($scope.links);
+                cancelLinkEditing();
+            };
+
+            $scope.cancelLinkEdit = function () {
+                cancelLinkEditing();
+            };
+
+            $scope.deleteLink = function () {
+                $scope.links.splice($scope.links.indexOf($scope.editingLink), 1);
+                $scope.saveLinkEdit();
+            };
+
+        }
+    ])
+;

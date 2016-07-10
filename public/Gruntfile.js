@@ -1,57 +1,94 @@
-module.exports = function(grunt) {
-  require('jit-grunt')(grunt);
-
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-
-  grunt.initConfig({
-    less: {
-      development: {
-        options: {
-          compress: true,
-          yuicompress: false,
-          optimization: 2
+module.exports = function (grunt) {
+    
+    // Project configuration
+    grunt.initConfig({
+        
+        pkg: grunt.file.readJSON('package.json'),
+        
+        uglify: {
+            dist: {
+                options: {
+                    beautify: true,
+                    sourceMap: true
+                },
+                src: 'src/**/*.js',
+                dest: 'build/js/app.min.js'
+            }
         },
-        files: [
-          { src: "less/application.less", dest: "css/application.min.css"}
-        ]
-      }
-    },
-    watch: {
-      styles: {
-        files: [
-          'less/**/*.less'
-        ],
-        tasks: ['less'],
-        options: {
-          nospawn: true
-        }
-      },
-      scripts: {
-        files: [],
-        tasks: ['uglify'],
-        options: {
-          nospawn: true
-        }
-      }
-    }
-    // uglify: {
-    //   js: {
-    //     files: {
-    //       'public/js/main.min.js': [
-    //         'public/js/libraries/*.js',
-    //         'public/js/firmy/*.js',
-    //         'public/echelon/fancybox/jquery.fancybox.pack.js',
-    //         'public/echelon/echelon.fancybox.js',
-    //         '!public/js/libraries/skel-layers.min.js',
-    //         '!public/js/libraries/skel.min.js',
-    //         '!public/js/libraries/init.js'
-    //       ]
-    //     }
-    //   }
-    // },
-  });
+        
+        sass: {
+            build: {
+                options: {
+                    style: 'expanded',
+                    trace: false,
+                    lineNumbers: true,
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/',
+                    src: '**/*.scss',
+                    dest: 'build/temp/',
+                    ext: '.css'
+                }]
+            }
+        },
+        
+        cssmin: {
+            build: {
+                src: 'build/**/*.css',
+                dest: 'build/css/app.min.css'
+            }
+        },
+        
+        clean: {
+            build: ['build', 'dist'],
+            temp: ['build/**/temp']
+        },
+        
+        watcher: { // renamed from watch
+            scripts: {
+                files: ['src/**/*.js', 'src/**/*.scss'],
+                tasks: ['default'],
+                options: {
+                    debounceDealay: 500,
+                    spawn: false
+                }
+            }
+        },
+        
+        copy: {
+            dist: {
+                src: 'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                dest: 'dist/js/bootstrap.min.js'
+            }
+        },
 
-  grunt.registerTask('default', ['less', 'watch', 'uglify']);
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: 'src/**/*.js',
+                dest: 'build/js/app.min.js'
+            }
+        }
+        
+    });
+    
+    // Load the plugins that provides tasks.
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+
+    // Available tasks:
+    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('build', ['clean:build', 'uglify', 'sass', 'cssmin', 'clean:temp', 'copy:dist']);
+    grunt.registerTask('dev', ['clean:build', 'concat', 'sass', 'cssmin', 'clean:temp', 'copy:dist']);
+    // rename watch to watcher and initialize watch task which will build at start
+    grunt.renameTask('watch', 'watcher');
+    grunt.registerTask('watch', ['build', 'watcher']);
 };

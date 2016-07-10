@@ -36,3 +36,8 @@ Thumbs.db
 # Folders to ignore
 bower_components
 node_modules
+
+# Build & Caches
+build
+dist
+.sass-cache
