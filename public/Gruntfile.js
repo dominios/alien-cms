@@ -86,9 +86,12 @@ module.exports = function (grunt) {
 
     // Available tasks:
     grunt.registerTask('default', ['watch']);
+
+    // build tasks
     grunt.registerTask('build', ['clean:build', 'uglify', 'sass', 'cssmin', 'clean:temp', 'copy:dist']);
     grunt.registerTask('dev', ['clean:build', 'concat', 'sass', 'cssmin', 'clean:temp', 'copy:dist']);
+
     // rename watch to watcher and initialize watch task which will build at start
     grunt.renameTask('watch', 'watcher');
-    grunt.registerTask('watch', ['build', 'watcher']);
+    grunt.registerTask('watch', ['dev', 'watcher']);
 };
