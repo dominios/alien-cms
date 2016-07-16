@@ -1,4 +1,8 @@
+@import "fonts";
+
 .admin-panel {
+
+  font-family: 'Roboto', sans-serif;
 
   @mixin label {
     padding: 3px 4px;
@@ -18,7 +22,6 @@
   border-left: 1px solid #aaa;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
 
-  font-family: sans-serif;
   font-size: 0.9rem;
   h1 {
     font-size: 1.6rem;
@@ -80,6 +83,47 @@
           }
         }
       }
+    }
+
+    &.user-profile {
+      height: 50px;
+
+      .col-image {
+        top: -3px;
+        img.profile-image {
+          border: 1px solid #ccc;
+          padding: 2px;
+        }
+      }
+
+      .col-name {
+        padding-left: 22px;
+      }
+
+      .col-buttons {
+        .btn-group {
+          .btn {
+            color: $gray;
+            padding: 0 0.35rem;
+            .fa-bell-o {
+              &.active {
+                animation: ringingBell 4s 1s infinite ease normal;
+                -webkit-animation: ringingBell 4s 1s infinite ease normal;
+                -moz-animation: ringingBell 4s 1s infinite ease normal;
+                -ms-animation: ringingBell 4s 1s infinite ease normal;
+                -o-animation: ringingBell 4s 1s infinite ease normal;
+              }
+            }
+            .fa-sign-out {
+              transition: padding-left .2s ease-in-out;
+              &:hover {
+                padding-left: .2rem;
+              }
+            }
+          }
+        }
+      }
+
     }
 
     &.page-settings {

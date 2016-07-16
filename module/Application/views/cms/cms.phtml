@@ -2,11 +2,38 @@
 
 <aside class="admin-panel">
 
-    <header class="admin-heading">
+    <header class="row admin-heading">
         <h1>ALiEN CMS <small>v 1.0.0a</small></h1>
     </header>
 
-    <section class="admin-section page-settings">
+    <section class="row admin-section user-profile">
+        <div class="col-xs-2 col-image">
+            <img src="/static/profile.jpg" alt="Profile Image" class="img-circle profile-image">
+        </div>
+        <div class="col-xs-5 col-name">
+            <strong>Admin Name</strong>
+            <br>Administrator
+        </div>
+        <div class="col-xs-5 col-buttons">
+
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                <button class="btn btn-link">
+                    <i class="fa fa-envelope-o text-muted"></i>
+                    <span class="label label-pill label-info label-badge">0</span>
+                </button>
+                <button class="btn btn-link">
+                    <i class="fa fa-bell-o active"></i>
+                    <span class="label label-pill label-danger label-badge">3</span>
+                </button>
+                <button class="btn btn-link">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="row admin-section page-settings">
         <header>
             <h2>Settings <small>Home Page</small></h2>
         </header>
@@ -48,7 +75,7 @@
         </div>
     </section>
 
-    <section class="global-settings">
+    <section class="row global-settings">
         <h2>Global Settings</h2>
         <button class="btn btn-primary">
             Show Settings
