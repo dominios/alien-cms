@@ -1,3 +1,10 @@
+/* 3rd party imports & settings */
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 $fa-font-path: '/static/fonts';
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
+
+/* App imports */
+
+@import "template/justified-nav";
+@import "admin/panel";
