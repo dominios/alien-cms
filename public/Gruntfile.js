@@ -58,8 +58,10 @@ module.exports = function (grunt) {
         
         copy: {
             dist: {
-                src: 'node_modules/bootstrap/dist/js/bootstrap.min.js',
-                dest: 'dist/js/bootstrap.min.js'
+                files: [
+                    { expand: true, src: ['node_modules/bootstrap/dist/js/bootstrap.min.js'], dest: 'dist/js/bootstrap.min.js', filter: 'isFile' },
+                    { expand: true, src: ['node_modules/font-awesome/fonts/*'], dest: 'static/fonts/', filter: 'isFile', flatten: true }
+                ]
             }
         },
 
