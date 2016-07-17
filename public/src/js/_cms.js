@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('AlienCms', [
+    'content-editable',
     'ngResource',
     'notifications',
     'AlienCms.navigation',
@@ -10,6 +11,8 @@ angular.module('AlienCms', [
     return {
         require: '?ngModel',
         link: function ($scope, elm, attr, ngModel) {
+
+            CKEDITOR.disableAutoInline = true;
 
             var ck = CKEDITOR.inline(elm[0]);
 

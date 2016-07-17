@@ -16,7 +16,6 @@
 
   .btn {
     border-radius: 1px;
-    //font-weight: 600;
   }
 
   font-size: 0.9rem;
@@ -37,7 +36,7 @@
 
     padding: 20px;
     background: #eee;
-    box-shadow: 0px 2px 3px rgba(170, 170, 170, 0.8);
+    box-shadow: 0 2px 3px rgba(170, 170, 170, 0.8);
     border-bottom: 1px solid rgba(140, 140, 140, 0.67);
 
     position: relative;
@@ -58,7 +57,7 @@
     margin-top: 26px;
     padding: 20px 0;
     background: #eee;
-    box-shadow: 0px 2px 3px rgba(170, 170, 170, 0.8);
+    box-shadow: 0 2px 3px rgba(170, 170, 170, 0.8);
     border-bottom: 1px solid rgba(140, 140, 140, 0.67);
 
     header {
@@ -119,6 +118,16 @@
     &.page-settings {
       header {
         margin-bottom: 10px;
+      }
+      .page-description {
+        p {
+          font-style: italic;
+        }
+      }
+      .page-options {
+        .row {
+          line-height: 2.2em;
+        }
       }
     }
 
