@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('AlienCms', [
-    'content-editable',
     'ngResource',
     'notifications',
+    'content-editable',
+    'ui.bootstrap',
     'AlienCms.navigation',
     'AlienCms.text',
     'AlienCms.page'

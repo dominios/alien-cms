@@ -21,7 +21,10 @@ angular.module('AlienCms.page', [])
             $scope.page = null;
             $scope.viewOptions = {
                 isHomePage: false,
-                statusClass: 'label-primary'
+                statusClass: 'label-primary',
+                availableStatuses: [
+                    'DRAFT', 'REVIEW', 'PUBLISHED'
+                ]
             };
 
             PageApi.get({ id: 1 }).$promise.then(function (response) {
@@ -29,6 +32,13 @@ angular.module('AlienCms.page', [])
                 console.info($scope.page);
                 reloadViewOptions();
             });
+
+            $scope.setStatus = function (status) {
+                $scope.page.meta.deleted = false;
+                $scope.page.meta.status = status;
+                $scope.savePage();
+                reloadViewOptions();
+            };
 
             $scope.clonePage = function () {
                 $notification.warning("Warning!", "This feature has not been implemented yet.");
@@ -62,11 +72,11 @@ angular.module('AlienCms.page', [])
                 $scope.viewOptions.isHomePage = $scope.page.meta.url === '#';
                 $scope.viewOptions.isDeleted = $scope.page.meta.deleted === true;
                 switch ($scope.page.meta.status) {
-                    case 'DRAFT': $scope.viewOptions.statusClass = 'label-primary'; break;
-                    case 'REVIEW': $scope.viewOptions.statusClass = 'label-info'; break;
-                    case 'PUBLISHED': $scope.viewOptions.statusClass = 'label-success'; break;
-                    case 'DELETED': $scope.viewOptions.statusClass = 'label-danger'; break;
-                    default: $scope.viewOptions.statusClass = 'label-primary'; break;
+                    case 'DRAFT': $scope.viewOptions.statusClass = 'primary'; break;
+                    case 'REVIEW': $scope.viewOptions.statusClass = 'info'; break;
+                    case 'PUBLISHED': $scope.viewOptions.statusClass = 'success'; break;
+                    case 'DELETED': $scope.viewOptions.statusClass = 'danger'; break;
+                    default: $scope.viewOptions.statusClass = 'primary'; break;
                 }
             }
 
