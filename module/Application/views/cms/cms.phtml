@@ -119,14 +119,17 @@
         <div class="col-xs-12 margin-top-7">
 
             <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" ng-click="savePage();">
                     <i class="fa fa-fw fa-save"></i> Save
                 </button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" ng-click="clonePage();">
                     <i class="fa fa-fw fa-copy"></i> Clone
                 </button>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" ng-click="deletePage();" ng-if="!viewOptions.isDeleted">
                     <i class="fa fa-fw fa-trash-o"></i> Delete
+                </button>
+                <button class="btn btn-sm btn-primary" ng-click="restorePage();" ng-if="viewOptions.isDeleted">
+                    <i class="fa fa-recycle"></i> Restore page
                 </button>
             </div>
 

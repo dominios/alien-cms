@@ -32,11 +32,19 @@ class PageController extends BaseRestfulController
         return $this->dataResponse($data);
     }
 
+    public function patchAction ()
+    {
+        $fileContent = $this->getRequest()->getContent();
+        $json = json_decode($fileContent, true);
+        $this->db->save($json['id'], $json);
+        return $this->successResponse();
+    }
+
     public function createDefault ()
     {
         return
             [
-                'id' => "myPageId", // string unique ID
+                'id' => "1", // string unique ID
                 'meta' => [
                     'name' => "Home Page",
                     'url' => '#', // string=> unique URL

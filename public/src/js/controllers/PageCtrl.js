@@ -30,8 +30,37 @@ angular.module('AlienCms.page', [])
                 reloadViewOptions();
             });
 
-            var reloadViewOptions = function() {
+            $scope.clonePage = function () {
+                $notification.warning("Warning!", "This feature has not been implemented yet.");
+            };
+
+            $scope.savePage = function () {
+                PageApi.update($scope.page).$promise.then(function () {
+                    $notification.success("Success!", "Your changes has been saved.");
+                });
+            };
+
+            $scope.deletePage = function () {
+                $scope.page.meta.deleted = true;
+                $scope.page.meta.status = 'DELETED';
+                PageApi.update($scope.page).$promise.then(function () {
+                    $notification.success("Success!", "Page has been deleted.");
+                    reloadViewOptions();
+                });
+            };
+
+            $scope.restorePage = function () {
+                $scope.page.meta.deleted = false;
+                $scope.page.meta.status = 'DRAFT';
+                PageApi.update($scope.page).$promise.then(function () {
+                    $notification.success("Success!", "Page has been restored.");
+                    reloadViewOptions();
+                });
+            };
+
+            var reloadViewOptions = function () {
                 $scope.viewOptions.isHomePage = $scope.page.meta.url === '#';
+                $scope.viewOptions.isDeleted = $scope.page.meta.deleted === true;
                 switch ($scope.page.meta.status) {
                     case 'DRAFT': $scope.viewOptions.statusClass = 'label-primary'; break;
                     case 'REVIEW': $scope.viewOptions.statusClass = 'label-info'; break;
