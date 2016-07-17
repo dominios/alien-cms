@@ -3,22 +3,14 @@
 .admin-panel {
 
   font-family: 'Roboto', sans-serif;
-
-  @mixin label {
-    padding: 3px 4px;
-    background: #888;
-    color: #fff;
-    border-radius: 4px;
-  }
-
   position: absolute;
   z-index: 999;
   right: 0;
   top: 0;
-  width: 320px;
+  width: 350px;
   height: 100%;
   padding: 20px 18px 0 18px;
-  background: #f7f7f7;
+  background: #fff;
   border-left: 1px solid #aaa;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
 
@@ -34,25 +26,6 @@
   }
   small {
     font-size: 0.7em;
-  }
-
-  .taglist {
-    list-style-type: none;
-    padding: 0;
-    &:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-    li {
-      @include label;
-      display: inline-block;
-      float: left;
-      margin-right: 5px;
-      background: #888;
-      color: #fff;
-      border-radius: 4px;
-    }
   }
 
   .admin-heading {
@@ -117,7 +90,7 @@
             .fa-sign-out {
               transition: padding-left .2s ease-in-out;
               &:hover {
-                padding-left: .2rem;
+                padding-left: .5rem;
               }
             }
           }
@@ -129,13 +102,6 @@
     &.page-settings {
       header {
         margin-bottom: 10px;
-      }
-      .status {
-        &.status-draft {
-          @include label;
-          background: #d58512;
-          color: #fff;
-        }
       }
     }
 

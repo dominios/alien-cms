@@ -16,7 +16,7 @@
         </div>
         <div class="col-xs-5 col-buttons">
 
-            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+            <div class="btn-group btn-group-lg" role="group">
                 <button class="btn btn-link">
                     <i class="fa fa-envelope-o text-muted"></i>
                     <span class="label label-pill label-info label-badge">0</span>
@@ -34,45 +34,99 @@
     </section>
 
     <section class="row admin-section page-settings">
-        <header>
-            <h2>Settings <small>Home Page</small></h2>
+
+        <header class="col-xs-12">
+            <h2>
+                Settings <small>Home Page</small>
+            </h2>
         </header>
-        <div>
-            <div><strong>Link</strong>: # <button class="btn btn-sm">Copy</button></div>
-            <div><strong>Status</strong>: <span class="status status-draft">DRAFT</span></div>
-            <div><strong>Created</strong>: 7.7.2016</div>
-            <div><strong>Last Update</strong>: 7.7.2016</div>
-            <div><strong>Language</strong>: SK</div>
-            <div><strong>Labels</strong>:
-                <ul class="taglist">
-                    <li>TAG1</li>
-                    <li>TAG2</li>
-                    <li>TAG3</li>
-                    <li>TAG4</li>
-                </ul>
-            </div>
-        </div>
-        <div>
-            <h4>Actions</h4>
 
-            <div>
-                <button class="btn btn-primary" disabled>
-                    Make Home Page
-                </button>
+        <div class="col-xs-12">
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-link"></i> Link</strong>
+                </div>
+                <div class="col-xs-3">
+                    #
+                </div>
+                <div class="col-xs-4">
+                    <button class="btn btn-sm">Copy</button>
+                </div>
             </div>
 
-            <div>
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-info"></i> Status</strong>
+                </div>
+                <div class="col-xs-7">
+                    <span class="label label-warning">DRAFT</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-calendar"></i> Created</strong>
+                </div>
+                <div class="col-xs-7">
+                    7.7.2016
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-calendar"></i> Last Update</strong>
+                </div>
+                <div class="col-xs-7">
+                    7.7.2016
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-globe"></i> Language</strong>
+                </div>
+                <div class="col-xs-7">
+                    SK
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <strong><i class="fa fa-fw fa-tags"></i> Labels</strong>
+                </div>
+                <div class="col-xs-7">
+                    <span class="label label-primary">TAG1</span>
+                    <span class="label label-danger">TAG2</span>
+                    <span class="label label-info">TAG3</span>
+                    <span class="label label-success">TAG4</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+            <button class="btn btn-sm btn-primary" disabled>
+                <i class="fa fa-home"></i> Make Home Page
+            </button>
+        </div>
+
+        <div class="col-xs-12">
+
+            <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-primary">
-                    Save
+                    <i class="fa fa-fw fa-save"></i> Save
                 </button>
                 <button class="btn btn-primary">
-                    Clone
+                    <i class="fa fa-fw fa-copy"></i> Clone
                 </button>
                 <button class="btn btn-primary">
-                    Delete
+                    <i class="fa fa-fw fa-trash-o"></i> Delete
                 </button>
             </div>
+
         </div>
+
     </section>
 
     <section class="row global-settings">
