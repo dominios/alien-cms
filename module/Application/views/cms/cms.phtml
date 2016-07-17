@@ -35,11 +35,11 @@
         </div>
     </section>
 
-    <section class="row admin-section page-settings">
+    <section class="row admin-section page-settings" ng-controller="PageCtrl">
 
         <header class="col-xs-12">
             <h2>
-                Settings <small>Home Page</small>
+                Settings <small ng-bind="page.meta.name"></small>
             </h2>
         </header>
 
@@ -50,7 +50,7 @@
                     <strong><i class="fa fa-fw fa-link"></i> Link</strong>
                 </div>
                 <div class="col-xs-3">
-                    #
+                    <span ng-bind="page.meta.url"></span>
                 </div>
                 <div class="col-xs-4">
                     <a href="#"><i class="fa fa-fw fa-clone"></i></a>
@@ -62,7 +62,7 @@
                     <strong><i class="fa fa-fw fa-info"></i> Status</strong>
                 </div>
                 <div class="col-xs-7">
-                    <span class="label label-warning">DRAFT</span>
+                    <span class="label {{viewOptions.statusClass}}" ng-bind="page.meta.status"></span>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                     <strong><i class="fa fa-fw fa-calendar"></i> Created</strong>
                 </div>
                 <div class="col-xs-7">
-                    7.7.2016
+                    @TBD
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                     <strong><i class="fa fa-fw fa-calendar"></i> Last Update</strong>
                 </div>
                 <div class="col-xs-7">
-                    7.7.2016
+                    @TBD
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
                     <strong><i class="fa fa-fw fa-globe"></i> Language</strong>
                 </div>
                 <div class="col-xs-7">
-                    SK
+                    @TBD
                 </div>
             </div>
 
@@ -98,18 +98,21 @@
                     <strong><i class="fa fa-fw fa-tags"></i> Labels</strong>
                 </div>
                 <div class="col-xs-7">
-                    <span class="label label-primary">TAG1</span>
-                    <span class="label label-danger">TAG2</span>
-                    <span class="label label-info">TAG3</span>
-                    <span class="label label-success">TAG4</span>
+                    <span ng-repeat="tag in page.meta.tags" class="label label-info">{{tag}}</span>
                 </div>
             </div>
 
         </div>
 
-        <div class="col-xs-12 margin-top-7">
-            <button class="btn btn-sm btn-primary" disabled>
-                <i class="fa fa-home"></i> Make Home Page
+        <div class="col-xs-12 margin-top-7" ng-if="viewOptions.isHomePage">
+            <button class="btn btn-sm btn-success" disabled>
+                <i class="fa fa-check"></i> Is home page
+            </button>
+        </div>
+
+        <div class="col-xs-12 margin-top-7" ng-if="!viewOptions.isHomePage">
+            <button class="btn btn-sm btn-primary">
+                <i class="fa fa-home"></i> Make <i>{{page.meta.name}}</i> home page
             </button>
         </div>
 

@@ -28,6 +28,15 @@ return [
                         'defaults' => [
                             'method' => 'list',
                         ]
+                    ],
+                    'pages' => [
+                        'route' => '/pages[/:id][/:method]',
+                        'namespace' => '',
+                        'controller' => '\Application\Controllers\Rest\PageController',
+                        'action' => 'rest',
+                        'defaults' => [
+                            'method' => 'list',
+                        ]
                     ]
                 ]
             ]
