@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                     { expand: true, flatten: true, dest: 'build/.tmp/3', src: ['node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'] },
                     { expand: true, flatten: true, dest: 'build/.tmp/4', src: ['node_modules/ng-content-editable/dist/ng-content-editable.min.js'] },
                     { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.css'] },
+                    // { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.css'] },
                     { expand: true, flatten: true, dest: 'build/ckeditor', src: ['node_modules/ckeditor/*'] }, // ckeditor cannot be added to build
                     { expand: true, flatten: true, dest: 'build/js', src: ['node_modules/bootstrap/dist/js/bootstrap.min.js'], filter: 'isFile' },
                     { expand: true, flatten: true, dest: 'static/fonts/', src: ['node_modules/font-awesome/fonts/*'], filter: 'isFile' }

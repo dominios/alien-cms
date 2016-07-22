@@ -112,7 +112,8 @@
                     <strong><i class="fa fa-fw fa-tags"></i> Labels</strong>
                 </div>
                 <div class="col-xs-7">
-                    <span ng-repeat="tag in page.meta.tags" class="label label-info">{{tag}}</span>
+                    <tags-input ng-model="page.meta.tags">
+                    <!--span ng-repeat="tag in page.meta.tags" class="label label-info">{{tag}}</span-->
                 </div>
             </div>
 

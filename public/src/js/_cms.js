@@ -4,6 +4,7 @@ angular.module('AlienCms', [
     'ngResource',
     'notifications',
     'content-editable',
+    'ngTagsInput',
     'ui.bootstrap',
     'AlienCms.navigation',
     'AlienCms.text',
