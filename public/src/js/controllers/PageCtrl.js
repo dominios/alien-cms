@@ -28,8 +28,7 @@ angular.module('AlienCms.page', [])
             };
 
             PageApi.get({ id: 1 }).$promise.then(function (response) {
-                $scope.page = response['data'];
-                console.info($scope.page);
+                $scope.page = response.data;
                 reloadViewOptions();
             });
 
@@ -45,6 +44,7 @@ angular.module('AlienCms.page', [])
             };
 
             $scope.savePage = function () {
+                $scope.page.meta.dateModified = Date.now();
                 PageApi.update($scope.page).$promise.then(function () {
                     $notification.success("Success!", "Your changes has been saved.");
                 });

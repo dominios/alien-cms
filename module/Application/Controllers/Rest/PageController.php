@@ -54,8 +54,9 @@ class PageController extends BaseRestfulController
                     ],
                     'status' => "PUBLISHED", // DRAFT, REVIEW, PUBLISHED, DELETED
                     'author' => "admin@admin.sk",
-                    'dateCreated' => "timestamp",
-                    'dateModified' => "timetsamp"
+                    'dateCreated' => time() * 1000,
+                    'dateModified' => null,
+                    'deleted' => false
                 ],
                 'versioning' => [
                     'version' => 1, // int=> incremental number

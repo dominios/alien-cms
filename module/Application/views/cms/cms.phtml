@@ -85,7 +85,7 @@
                     <strong><i class="fa fa-fw fa-calendar"></i> Created</strong>
                 </div>
                 <div class="col-xs-7">
-                    @TBD
+                    {{page.meta.dateCreated | date: 'd.M.yyyy H:mm:ss'}}
                 </div>
             </div>
 
@@ -94,7 +94,8 @@
                     <strong><i class="fa fa-fw fa-calendar"></i> Last Update</strong>
                 </div>
                 <div class="col-xs-7">
-                    @TBD
+                    {{page.meta.dateModified | date: 'd.M.yyyy H:mm:ss'}}
+                    <span ng-if="!page.meta.dateModified">N/A</span>
                 </div>
             </div>
 
@@ -103,7 +104,7 @@
                     <strong><i class="fa fa-fw fa-globe"></i> Language</strong>
                 </div>
                 <div class="col-xs-7">
-                    @TBD
+                    N/A
                 </div>
             </div>
 
@@ -113,7 +114,6 @@
                 </div>
                 <div class="col-xs-7">
                     <tags-input ng-model="page.meta.tags">
-                    <!--span ng-repeat="tag in page.meta.tags" class="label label-info">{{tag}}</span-->
                 </div>
             </div>
 
