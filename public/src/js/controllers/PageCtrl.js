@@ -16,7 +16,7 @@ angular.module('AlienCms.page', [])
     ])
 
     .controller('PageCtrl', ['$scope', '$notification', '$loader', 'PageApi',
-        function ($scope, loader, $loader, PageApi) {
+        function ($scope, $notification, $loader, PageApi) {
 
             $scope.page = null;
             $scope.viewOptions = {
