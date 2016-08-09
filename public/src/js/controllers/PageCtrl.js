@@ -15,8 +15,8 @@ angular.module('AlienCms.page', [])
         }
     ])
 
-    .controller('PageCtrl', ['$scope', '$notification', 'PageApi',
-        function ($scope, $notification, PageApi) {
+    .controller('PageCtrl', ['$scope', '$notification', '$loader', 'PageApi',
+        function ($scope, loader, $loader, PageApi) {
 
             $scope.page = null;
             $scope.viewOptions = {
@@ -27,7 +27,9 @@ angular.module('AlienCms.page', [])
                 ]
             };
 
-            PageApi.get({ id: 1 }).$promise.then(function (response) {
+            var promise = PageApi.get({ id: 1 }).$promise;
+            $loader.addPromise(promise);
+            promise.then(function (response) {
                 $scope.page = response.data;
                 reloadViewOptions();
             });

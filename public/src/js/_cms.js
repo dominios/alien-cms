@@ -3,30 +3,35 @@
 angular.module('AlienCms', [
     'ngResource',
     'notifications',
+    'loader',
     'content-editable',
     'ngTagsInput',
     'ui.bootstrap',
     'AlienCms.navigation',
     'AlienCms.text',
     'AlienCms.page'
-]).directive('ckEditor', [function () {
-    return {
-        require: '?ngModel',
-        link: function ($scope, elm, attr, ngModel) {
+]);
 
-            CKEDITOR.disableAutoInline = true;
+angular.module('AlienCms')
+    .directive('ckEditor', [function () {
+            return {
+                require: '?ngModel',
+                link: function ($scope, elm, attr, ngModel) {
 
-            var ck = CKEDITOR.inline(elm[0]);
+                    CKEDITOR.disableAutoInline = true;
 
-            ck.on('pasteState', function () {
-                $scope.$apply(function () {
-                    ngModel.$setViewValue(ck.getData());
-                });
-            });
+                    var ck = CKEDITOR.inline(elm[0]);
 
-            ngModel.$render = function (value) {
-                ck.setData(ngModel.$modelValue);
+                    ck.on('pasteState', function () {
+                        $scope.$apply(function () {
+                            ngModel.$setViewValue(ck.getData());
+                        });
+                    });
+
+                    ngModel.$render = function (value) {
+                        ck.setData(ngModel.$modelValue);
+                    };
+                }
             };
-        }
-    };
-}]);
+        }]
+    );
