@@ -32,3 +32,17 @@ tags-input {
     }
   }
 }
+
+.btn {
+  &:not(.btn-link) {
+    box-shadow: rgba(35, 35, 35, 0.4) 0 2px 6px 1px;
+  }
+  transition: all .2s ease-in-out;
+}
+
+.btn-group {
+  box-shadow: rgba(35, 35, 35, 0.4) 0 2px 6px 1px;
+  &.no-shadow, .btn {
+    box-shadow: none;
+  }
+}
