@@ -1,10 +1,12 @@
 <div notifications="top right" class="cms-notifications"></div>
 
-<aside class="admin-panel">
+<aside class="admin-panel" ng-cloak>
 
     <header class="row admin-heading">
         <div class="col-xs-12">
-            <h1>ALiEN CMS <small>v 1.0.0a</small></h1>
+            <h1>ALiEN CMS
+                <small>v 1.0.0a</small>
+            </h1>
             <loader/>
         </div>
     </header>
@@ -40,7 +42,8 @@
 
         <header class="col-xs-12">
             <h2>
-                Settings <small ng-bind="page.meta.name"></small>
+                Settings
+                <small ng-bind="page.meta.name"></small>
             </h2>
         </header>
 
@@ -70,11 +73,14 @@
                     <!--span class="label {{viewOptions.statusClass}}" ng-bind="page.meta.status"></span-->
 
                     <div class="btn-group" uib-dropdown keyboard-nav>
-                        <button type="button" class="btn btn-sm btn-{{viewOptions.statusClass}}-outline dropdown-toggle" data-toggle="status-dropdown" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
+                        <button type="button" class="btn btn-sm btn-{{viewOptions.statusClass}}-outline dropdown-toggle"
+                                data-toggle="status-dropdown" aria-haspopup="true" aria-expanded="false"
+                                uib-dropdown-toggle>
                             {{page.meta.status}}
                         </button>
                         <div class="dropdown-menu" id="status-dropdown" uib-dropdown-menu>
-                            <a ng-repeat="status in viewOptions.availableStatuses" class="dropdown-item" href="#" ng-click="setStatus(status);">{{status}}</a>
+                            <a ng-repeat="status in viewOptions.availableStatuses" class="dropdown-item" href="#"
+                               ng-click="setStatus(status);">{{status}}</a>
                         </div>
                     </div>
 
@@ -134,20 +140,25 @@
 
         <div class="col-xs-12 margin-top-7">
 
-            <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-primary" ng-click="savePage();">
-                    <i class="fa fa-fw fa-save"></i> Save
-                </button>
-                <button class="btn btn-primary" ng-click="clonePage();">
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised" ng-click="savePage();" ng-disabled="viewOptions.isSaving">
+                    <span ng-if="viewOptions.isSaving">
+                        <i class="fa fa-spin fa-spinner"></i> Saving...
+                    </span>
+                    <span ng-if="!viewOptions.isSaving">
+                        <i class="fa fa-fw fa-save"></i> Save
+                    </span>
+                </md-button>
+                <md-button class="md-raised" ng-click="clonePage();">
                     <i class="fa fa-fw fa-copy"></i> Clone
-                </button>
-                <button class="btn btn-primary" ng-click="deletePage();" ng-if="!viewOptions.isDeleted">
+                </md-button>
+                <md-button class="md-raised" ng-click="deletePage();" ng-if="!viewOptions.isDeleted">
                     <i class="fa fa-fw fa-trash-o"></i> Delete
-                </button>
-                <button class="btn btn-sm btn-primary" ng-click="restorePage();" ng-if="viewOptions.isDeleted">
-                    <i class="fa fa-recycle"></i> Restore page
-                </button>
-            </div>
+                </md-button>
+                <md-button class="md-raised" ng-click="restorePage();" ng-if="viewOptions.isDeleted">
+                    <i class="fa fa-recycle"></i> Restore
+                </md-button>
+            </section>
 
         </div>
 

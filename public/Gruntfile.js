@@ -80,6 +80,14 @@ module.exports = function (grunt) {
                     // { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.css'] },
                     { expand: true, flatten: true, dest: 'build/ckeditor', src: ['node_modules/ckeditor/*'] }, // ckeditor cannot be added to build
                     { expand: true, flatten: true, dest: 'build/js', src: ['node_modules/bootstrap/dist/js/bootstrap.min.js'], filter: 'isFile' },
+
+                    // material design & its dependencies
+                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-aria/angular-aria.js'] },
+                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-animate/angular-animate.js'] },
+                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-material/angular-material.js'] },
+                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-material/angular-material.css'] },
+
+
                     { expand: true, flatten: true, dest: 'static/fonts/', src: ['node_modules/font-awesome/fonts/*'], filter: 'isFile' }
                 ]
             }

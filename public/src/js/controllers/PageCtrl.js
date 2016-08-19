@@ -21,6 +21,7 @@ angular.module('AlienCms.page', [])
             $scope.page = null;
             $scope.viewOptions = {
                 isHomePage: false,
+                isSaving: false,
                 statusClass: 'label-primary',
                 availableStatuses: [
                     'DRAFT', 'REVIEW', 'PUBLISHED'
@@ -46,11 +47,13 @@ angular.module('AlienCms.page', [])
             };
 
             $scope.savePage = function () {
+                $scope.viewOptions.isSaving = true;
                 $scope.page.meta.dateModified = Date.now();
                 var promise = PageApi.update($scope.page).$promise;
                 $loader.addPromise(promise);
                 promise.then(function () {
                     $notification.success("Success!", "Your changes has been saved.");
+                    $scope.viewOptions.isSaving = false;
                 });
             };
 

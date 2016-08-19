@@ -2,6 +2,7 @@
 
 angular.module('AlienCms', [
     'ngResource',
+    'ngMaterial',
     'notifications',
     'loader',
     'content-editable',
