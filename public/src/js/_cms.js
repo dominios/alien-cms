@@ -1,38 +1,42 @@
-'use strict';
+(function () {
 
-angular.module('AlienCms', [
-    'ngResource',
-    'ngMaterial',
-    'notifications',
-    'loader',
-    'content-editable',
-    'ngTagsInput',
-    'ui.bootstrap',
-    'AlienCms.navigation',
-    'AlienCms.text',
-    'AlienCms.page'
-]);
+    'use strict';
 
-angular.module('AlienCms')
-    .directive('ckEditor', [function () {
-            return {
-                require: '?ngModel',
-                link: function ($scope, elm, attr, ngModel) {
+    angular.module('AlienCms', [
+        'ngResource',
+        'ngMaterial',
+        'notifications',
+        'loader',
+        'content-editable',
+        'ngTagsInput',
+        'ui.bootstrap',
+        'AlienCms.navigation',
+        'AlienCms.text',
+        'AlienCms.page'
+    ]);
 
-                    CKEDITOR.disableAutoInline = true;
+    angular.module('AlienCms')
+        .directive('ckEditor', [function () {
+                return {
+                    require: '?ngModel',
+                    link: function ($scope, elm, attr, ngModel) {
 
-                    var ck = CKEDITOR.inline(elm[0]);
+                        CKEDITOR.disableAutoInline = true;
 
-                    ck.on('pasteState', function () {
-                        $scope.$apply(function () {
-                            ngModel.$setViewValue(ck.getData());
+                        var ck = CKEDITOR.inline(elm[0]);
+
+                        ck.on('pasteState', function () {
+                            $scope.$apply(function () {
+                                ngModel.$setViewValue(ck.getData());
+                            });
                         });
-                    });
 
-                    ngModel.$render = function (value) {
-                        ck.setData(ngModel.$modelValue);
-                    };
-                }
-            };
-        }]
-    );
+                        ngModel.$render = function (value) {
+                            ck.setData(ngModel.$modelValue);
+                        };
+                    }
+                };
+            }]
+        );
+
+})();
