@@ -4,90 +4,111 @@
 
     angular
         .module('AlienCms.page')
+        .component('pageSettings', {
+            templateUrl: 'src/js/components/page/template.html'
+        })
         .controller('PageCtrl', PageController);
 
     PageController.$inject = ['$scope', '$notification', '$loader', 'PageApi'];
+
     function PageController ($scope, $notification, $loader, PageApi) {
 
-        $scope.page = null;
-        $scope.viewOptions = {
+        var vm = this;
+        vm.page = null;
+        vm.options = {
             isHomePage: false,
             isSaving: false,
+            isDeleting: false,
+            isRestoring: false,
+            isCloning: false,
             statusClass: 'label-primary',
             availableStatuses: [
                 'DRAFT', 'REVIEW', 'PUBLISHED'
             ]
         };
+        vm.setStatus = setStatus;
+        vm.clonePage = clonePage;
+        vm.savePage = savePage;
+        vm.deletePage = deletePage;
+        vm.restorePage = restorePage;
 
-        var promise = PageApi.get({ id: 1 }).$promise;
-        $loader.addPromise(promise);
-        promise.then(function (response) {
-            $scope.page = response.data;
-            reloadViewOptions();
-        });
+        activate();
 
-        $scope.setStatus = function (status) {
-            $scope.page.meta.deleted = false;
-            $scope.page.meta.status = status;
-            $scope.savePage();
-            reloadViewOptions();
-        };
+        function activate () {
+            var promise = PageApi.get({ id: 1 }).$promise;
+            $loader.addPromise(promise);
+            promise.then(function (response) {
+                vm.page = response.data;
+                reloadOptions();
+            });
+        }
 
-        $scope.clonePage = function () {
+        function setStatus (status) {
+            vm.page.meta.deleted = false;
+            vm.page.meta.status = status;
+            savePage();
+            reloadOptions();
+        }
+
+        function clonePage () {
             $notification.warning("Warning!", "This feature has not been implemented yet.");
-        };
+        }
 
-        $scope.savePage = function () {
-            $scope.viewOptions.isSaving = true;
-            $scope.page.meta.dateModified = Date.now();
-            var promise = PageApi.update($scope.page).$promise;
+        function savePage () {
+            vm.options.isSaving = true;
+            vm.page.meta.dateModified = Date.now();
+            var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
                 $notification.success("Success!", "Your changes has been saved.");
-                $scope.viewOptions.isSaving = false;
+                vm.options.isSaving = false;
             });
-        };
+        }
 
-        $scope.deletePage = function () {
-            $scope.page.meta.deleted = true;
-            $scope.page.meta.status = 'DELETED';
-            var promise = PageApi.update($scope.page).$promise;
+        function deletePage () {
+            vm.options.isDeleting = true;
+            vm.page.meta.deleted = true;
+            vm.page.meta.status = 'DELETED';
+            var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
                 $notification.success("Success!", "Page has been deleted.");
-                reloadViewOptions();
+                vm.options.isDeleting = false;
+                reloadOptions();
             });
-        };
+        }
 
-        $scope.restorePage = function () {
-            $scope.page.meta.deleted = false;
-            $scope.page.meta.status = 'DRAFT';
-            var promise = PageApi.update($scope.page).$promise;
+        function restorePage () {
+            vm.options.isRestoring = true;
+            vm.page.meta.deleted = false;
+            vm.page.meta.status = 'DRAFT';
+            var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
                 $notification.success("Success!", "Page has been restored.");
-                reloadViewOptions();
+                vm.options.isRestoring = false;
+                reloadOptions();
             });
-        };
+        }
 
-        var reloadViewOptions = function () {
-            $scope.viewOptions.isHomePage = $scope.page.meta.url === '#';
-            $scope.viewOptions.isDeleted = $scope.page.meta.deleted === true;
-            switch ($scope.page.meta.status) {
+        var reloadOptions = function () {
+            vm.options.isHomePage = vm.page.meta.url === '#';
+            vm.options.isDeleted = vm.page.meta.deleted === true;
+            switch (vm.page.meta.status) {
                 case 'DRAFT':
-                    $scope.viewOptions.statusClass = 'primary';
+                    vm.options.statusClass = 'primary';
                     break;
                 case 'REVIEW':
-                    $scope.viewOptions.statusClass = 'info';
+                    vm.options.statusClass = 'info';
                     break;
                 case 'PUBLISHED':
-                    $scope.viewOptions.statusClass = 'success';
+                    vm.options.statusClass = 'success';
                     break;
                 case 'DELETED':
-                    $scope.viewOptions.statusClass = 'danger';
+                    vm.options.statusClass = 'danger';
                     break;
                 default:
-                    $scope.viewOptions.statusClass = 'primary';
+                    vm.options.statusClass = 'primary';
                     break;
             }
         }
