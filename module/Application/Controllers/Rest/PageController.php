@@ -4,31 +4,33 @@ namespace Application\Controllers\Rest;
 
 
 use Alien\Rest\BaseRestfulController;
-use MicroDB\Database;
+use Application\Providers\Page\PageProvider;
 
 class PageController extends BaseRestfulController
 {
 
     /**
-     * @var Database
+     * @var PageProvider
      */
-    protected $db;
+    protected $provider;
 
-
-    public function __construct (Database $database)
+    public function __construct (PageProvider $provider)
     {
         parent::__construct();
-        $this->db = $database;
+        $this->provider = $provider;
 
-        if (!$this->db->exists(1)) {
-            $this->db->create($this->createDefault());
+//        sleep(2);
+
+        if (!$this->provider->exists(1)) {
+            $default = $this->provider->getDefault();
+            $this->provider->create($default);
         }
     }
 
     public function getAction ()
     {
         $id = $this->getRequest()->getParam('id');
-        $data = $this->db->load($id);
+        $data = $this->provider->get($id);
         return $this->dataResponse($data);
     }
 
@@ -36,59 +38,8 @@ class PageController extends BaseRestfulController
     {
         $fileContent = $this->getRequest()->getContent();
         $json = json_decode($fileContent, true);
-        $this->db->save($json['id'], $json);
+        $this->provider->update($json);
         return $this->successResponse();
-    }
-
-    public function createDefault ()
-    {
-        return
-            [
-                'id' => "1", // string unique ID
-                'meta' => [
-                    'name' => "Home Page",
-                    'url' => '#', // string=> unique URL
-                    'description' => "...",
-                    'tags' => [
-                        "foo", "bar"
-                    ],
-                    'status' => "PUBLISHED", // DRAFT, REVIEW, PUBLISHED, DELETED
-                    'author' => "admin@admin.sk",
-                    'dateCreated' => time() * 1000,
-                    'dateModified' => null,
-                    'deleted' => false
-                ],
-                'versioning' => [
-                    'version' => 1, // int=> incremental number
-                    'previousVersions' => [
-
-                    ]
-                ],
-                'localization' => [
-                    // feature will be added later
-                ],
-                'template' => [
-                    // template to use (for common components)
-                    // possible to add overrides
-                    'id' => "myTemplate"
-                ],
-                'body' => [
-                    // components=> ID when referenced, otherwise full data models
-                    'title' => "Home Page Title",
-                    'heading' => [
-                        // example of 2 components inside 1 placeholder
-                        0 => [
-
-                        ],
-                        1 => [
-
-                        ]
-                    ],
-                    'main' => [
-
-                    ]
-                ]
-            ];
     }
 
 }
