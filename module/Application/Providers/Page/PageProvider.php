@@ -5,14 +5,25 @@ namespace Application\Providers\Page;
 use Application\Providers\Base\AbstractProvider;
 use Application\Providers\Base\CRUDInterface;
 
+/**
+ * Provides all REST operations for Page model.
+ */
 class PageProvider extends AbstractProvider
 {
 
+    /**
+     * PageProvider constructor.
+     * @param CRUDInterface $adapter
+     */
     public function __construct (CRUDInterface $adapter)
     {
         parent::__construct($adapter);
     }
 
+    /**
+     * Returns default hard-coded page model with sample values in JSON format.
+     * @return array
+     */
     public function getDefault ()
     {
         return [
