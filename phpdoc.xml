@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>Alien Cms Docs</title>
+    <parser>
+        <target>docs/output</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility/>
+    </parser>
+    <transformer>
+        <target>docs/result</target>
+    </transformer>
+    <files>
+        <directory>module</directory>
+    </files>
+</phpdoc>

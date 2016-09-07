@@ -21,5 +21,6 @@ node_modules/
 npm-debug.log
 
 # generated docs & utils
+docs
 phpdocs/*
 /phpunit.xml
