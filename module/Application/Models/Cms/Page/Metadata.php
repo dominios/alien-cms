@@ -2,7 +2,9 @@
 
 namespace Application\Models\Cms\Page;
 
-class Metadata extends \Application\Models\Cms\Utils\Metadata
+use Application\Models\Cms\Utils\Taggable;
+
+class Metadata extends \Application\Models\Cms\Utils\Metadata implements Taggable
 {
     /**
      * @var string
@@ -83,10 +85,29 @@ class Metadata extends \Application\Models\Cms\Utils\Metadata
     /**
      * @param string[] $tags
      */
-    public function setTags ($tags)
+    public function setTags (array $tags)
     {
         $this->tags = $tags;
     }
 
+    public function hasTag ($tag)
+    {
+        return in_array($tag, $this->tags);
+    }
 
+    public function addTag ($tag)
+    {
+        $this->tags[] = $tag;
+    }
+
+    public function removeTag ($tag)
+    {
+        $this->tags = array_diff($this->tags, [$tag]);
+    }
+
+    public function flushTags ()
+    {
+        $this->tags = [];
+    }
+    
 }
