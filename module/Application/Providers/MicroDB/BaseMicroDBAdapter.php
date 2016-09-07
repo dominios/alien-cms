@@ -5,7 +5,7 @@ namespace Application\Providers\MicroDB;
 use Application\Providers\Base\CRUDInterface;
 use MicroDB\Database;
 
-class MicroDBAdapter implements CRUDInterface
+class BaseMicroDBAdapter implements CRUDInterface
 {
 
     /**

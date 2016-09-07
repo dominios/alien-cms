@@ -29,16 +29,11 @@ return [
             $path = (implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'storage', 'page']));
             return new \MicroDB\Database($path);
         },
-
-        'MicroDBAdapter' => function (\Alien\Di\ServiceLocator $sl) {
-            /* @var $db \MicroDB\Database */
-            $db = $sl->get('PageDb');
-            return new \Application\Providers\MicroDB\MicroDBAdapter($db);
-        },
         
         '\Application\Providers\Page\PageProvider' => function (\Alien\Di\ServiceLocator $sl) {
-            /* @var $adapter \Application\Providers\MicroDB\MicroDBAdapter */
-            $adapter = $sl->get('MicroDBAdapter');
+            /* @var $db \MicroDB\Database */
+            $db = $sl->get('PageDb');
+            $adapter = new \Application\Providers\Page\PageMicroDBAdapter($db);
             return new \Application\Providers\Page\PageProvider($adapter);
         },
 
