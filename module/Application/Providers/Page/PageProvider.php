@@ -16,8 +16,10 @@ class PageProvider extends AbstractProvider
     public function getDefault ()
     {
         return [
-            'id' => "1", // string unique ID
+            'id' => "1", // string unique ID,
+            'type' => '\Application\Models\Cms\Page\Page',
             'meta' => [
+                'type' => '\Application\Models\Cms\Page\Metadata',
                 'name' => "Home Page",
                 'url' => '#', // string=> unique URL
                 'description' => "...",
