@@ -4,9 +4,20 @@ namespace Application\Models\Cms\Utils;
 
 use Closure;
 
+/**
+ * Converts entities between JSON and PHP objects representation.
+ */
 class Serializer
 {
 
+    /**
+     * Converts object instance into JSON.
+     * All of the class properties are also serialized recursively.
+     * @param JsonInterface $object object to serialize.
+     * @return array JSON representation.
+     * @todo error handling (if any)
+     * @todo handling non JsonInterface objects coversion (or error)
+     */
     public function toJson (JsonInterface $object)
     {
 
@@ -33,6 +44,16 @@ class Serializer
         return $ret;
     }
 
+    /**
+     * Creates object instance from JSON.
+     * The JSON must have <code>type</code> property set with existing class name,
+     * otherwise exception will be thrown.
+     * If any sub-object has its type set, it's unserialized recursively.
+     * @param array $json json to unserialize.
+     * @return mixed instance of class defined in <code>type</code> property.
+     * @todo add optional validation.
+     * @todo specific exception type.
+     */
     public function fromJson ($json)
     {
         // @todo add validation here

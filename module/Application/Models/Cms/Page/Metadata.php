@@ -4,24 +4,31 @@ namespace Application\Models\Cms\Page;
 
 use Application\Models\Cms\Utils\Taggable;
 
+/**
+ * Page Metadata model.
+ */
 class Metadata extends \Application\Models\Cms\Utils\Metadata implements Taggable
 {
     /**
+     * Page URL.
      * @var string
      */
     protected $url;
 
     /**
+     * Author of the page.
      * @var string
      */
     protected $author;
 
     /**
+     * Status of page.
      * @var string
      */
     protected $status;
 
     /**
+     * Associated labels.
      * @var string[]
      */
     protected $tags;
@@ -74,17 +81,11 @@ class Metadata extends \Application\Models\Cms\Utils\Metadata implements Taggabl
         $this->status = $status;
     }
 
-    /**
-     * @return string[]
-     */
     public function getTags ()
     {
         return $this->tags;
     }
 
-    /**
-     * @param string[] $tags
-     */
     public function setTags (array $tags)
     {
         $this->tags = $tags;

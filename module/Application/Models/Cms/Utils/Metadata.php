@@ -2,45 +2,51 @@
 
 namespace Application\Models\Cms\Utils;
 
+/**
+ * Base Metadata structure same for all entities.
+ * Each entity should use this metadata or extend them.
+ */
 class Metadata implements JsonInterface
 {
 
     /**
+     * Type of the object (full classified class name).
      * @var string
      */
     protected $type;
 
     /**
+     * Name of the object.
      * @var string
      */
     protected $name;
 
     /**
+     * Short description of the object.
      * @var string
      */
     protected $description;
-
+    
     /**
-     * @var string[]
-     */
-    protected $tags;
-
-    /**
+     * Date when the object was created.
      * @var \DateTime
      */
     protected $dateCreated;
 
     /**
+     * Date when the object was last modified.
      * @var \DateTime
      */
     protected $dateModified;
 
     /**
+     * Flag if object has been deleted.
      * @var bool
      */
     protected $deleted;
 
     /**
+     * Returns type of the object.
      * @return string
      */
     public function getType ()
@@ -49,6 +55,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets type of the object.
      * @param string $type
      */
     public function setType ($type)
@@ -57,6 +64,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Returns name of the object.
      * @return string
      */
     public function getName ()
@@ -65,6 +73,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets name of the object.
      * @param string $name
      */
     public function setName ($name)
@@ -73,6 +82,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Returns description of the object.
      * @return string
      */
     public function getDescription ()
@@ -81,6 +91,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets the description of the object.
      * @param string $description
      */
     public function setDescription ($description)
@@ -89,22 +100,7 @@ class Metadata implements JsonInterface
     }
 
     /**
-     * @return \string[]
-     */
-    public function getTags ()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param \string[] $tags
-     */
-    public function setTags ($tags)
-    {
-        $this->tags = $tags ;
-    }
-
-    /**
+     * Returns when the object was created.
      * @return \DateTime
      */
     public function getDateCreated ()
@@ -113,7 +109,10 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets date when the object was created.
      * @param \DateTime $dateCreated
+     * @internal dateCreated should be readonly, this method is used only during serialization.
+     * 
      */
     public function setDateCreated ($dateCreated)
     {
@@ -121,6 +120,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Returns date when the object was last modified.
      * @return \DateTime
      */
     public function getDateModified ()
@@ -129,6 +129,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets date of last modify to given date.
      * @param \DateTime $dateModified
      */
     public function setDateModified ($dateModified)
@@ -137,6 +138,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Returns if object is flagged as deleted.
      * @return boolean
      */
     public function isDeleted ()
@@ -145,6 +147,7 @@ class Metadata implements JsonInterface
     }
 
     /**
+     * Sets deleted flag.
      * @param boolean $deleted
      */
     public function setDeleted ($deleted)

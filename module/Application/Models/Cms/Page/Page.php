@@ -5,20 +5,26 @@ namespace Application\Models\Cms\Page;
 use Application\Models\Cms\Utils\Identified;
 use Application\Models\Cms\Utils\JsonInterface;
 
+/**
+ * Page data model.
+ */
 class Page implements Identified, JsonInterface
 {
 
     /**
+     * Page ID.
      * @var int
      */
     protected $id;
 
     /**
-     * @var Metadata common metadata structure
+     * Metadata section.
+     * @var Metadata
      */
     protected $meta;
 
     /**
+     * Body section.
      * @var Body
      */
     protected $body;
@@ -29,13 +35,16 @@ class Page implements Identified, JsonInterface
 //
 //    protected $template;
 
+    /**
+     * @inheritdoc
+     */
     public function getId ()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @inheritdoc
      */
     public function setId ($id)
     {
@@ -43,6 +52,7 @@ class Page implements Identified, JsonInterface
     }
 
     /**
+     * Returns page metadata.
      * @return Metadata
      */
     public function getMeta ()
@@ -51,6 +61,7 @@ class Page implements Identified, JsonInterface
     }
 
     /**
+     * Sets page metadata.
      * @param Metadata $meta
      */
     public function setMeta ($meta)
@@ -59,6 +70,7 @@ class Page implements Identified, JsonInterface
     }
 
     /**
+     * Returns page body.
      * @return Body
      */
     public function getBody ()
@@ -67,6 +79,7 @@ class Page implements Identified, JsonInterface
     }
 
     /**
+     * Sets page body/
      * @param Body $body
      */
     public function setBody ($body)
