@@ -28,9 +28,9 @@ class PageProvider extends AbstractProvider
     {
         return [
             'id' => "1", // string unique ID,
-            'type' => '\Application\Models\Cms\Page\Page',
+            'type' => '\Application\Models\Page\Page',
             'meta' => [
-                'type' => '\Application\Models\Cms\Page\Metadata',
+                'type' => '\Application\Models\Page\Metadata',
                 'name' => "Home Page",
                 'url' => '#', // string=> unique URL
                 'description' => "...",

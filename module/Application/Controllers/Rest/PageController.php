@@ -3,8 +3,7 @@
 namespace Application\Controllers\Rest;
 
 use Alien\Rest\BaseRestfulController;
-use Application\Models\Cms\Page\Page;
-use Application\Models\Cms\Utils\Serializer;
+use Application\Models\Utils\Serializer;
 use Application\Providers\Page\PageProvider;
 
 class PageController extends BaseRestfulController

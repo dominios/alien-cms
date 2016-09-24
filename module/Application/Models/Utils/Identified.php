@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Models\Cms\Utils;
+namespace Application\Models\Utils;
 
 /**
  * Interface for defining entities with unique ID.

@@ -1,13 +1,13 @@
 <?php
 
-namespace Application\Models\Cms\Page;
+namespace Application\Models\Page;
 
-use Application\Models\Cms\Utils\Taggable;
+use Application\Models\Utils\Taggable;
 
 /**
  * Page Metadata model.
  */
-class Metadata extends \Application\Models\Cms\Utils\Metadata implements Taggable
+class Metadata extends \Application\Models\Utils\Metadata implements Taggable
 {
     /**
      * Page URL.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Models\Cms\Page;
+namespace Application\Models\Page;
 
 /**
  * Page Body data model.

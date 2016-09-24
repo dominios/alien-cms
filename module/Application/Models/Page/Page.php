@@ -1,9 +1,9 @@
 <?php
 
-namespace Application\Models\Cms\Page;
+namespace Application\Models\Page;
 
-use Application\Models\Cms\Utils\Identified;
-use Application\Models\Cms\Utils\JsonInterface;
+use Application\Models\Utils\Identified;
+use Application\Models\Utils\JsonInterface;
 
 /**
  * Page data model.
