@@ -7,7 +7,8 @@
     ],
     "require": {
         "alien/framework": "dev-master",
-        "morris/microdb": "*"
+        "morris/microdb": "*",
+        "tracy/tracy": "^2.4"
     },
     "require-dev": {
 	"phpdocumentor/phpdocumentor": "2.*"

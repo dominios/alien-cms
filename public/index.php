@@ -10,10 +10,9 @@ try {
     header("Content-Type: text/html; charset=UTF8");
 
     $baseConfig = new SplFileInfo(__DIR__ . "/../module/Application/config/config.php");
-    $controllersConfig = new SplFileInfo(__DIR__ . "/../module/Application/config/controllers.php");
     $servicesConfig = new SplFileInfo(__DIR__ . "/../module/Application/config/services.php");
 
-    $config = new \Alien\Configuration($baseConfig, $controllersConfig, $servicesConfig);
+    $config = new \Alien\Configuration($baseConfig, $servicesConfig);
 
     $app = new Application();
     $app->bootstrap($config);
