@@ -5,7 +5,7 @@ return [
     'timezone' => 'Europe/Bratislava',
 
     'autoload' => [
-        __DIR__ . '/../autoload'
+        // __DIR__ . '/../autoload'
     ],
 
 ];
