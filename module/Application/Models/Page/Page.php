@@ -29,6 +29,13 @@ class Page implements Identified, JsonInterface
      */
     protected $body;
 
+    /**
+     * Type of the object.
+     * Should always match PHP class name.
+     * @var String
+     */
+    protected $type;
+
 //    protected $versioning;
 //
 //    protected $localization;
@@ -42,15 +49,6 @@ class Page implements Identified, JsonInterface
     {
         return $this->id;
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function setId ($id)
-    {
-        $this->id = $id;
-    }
-
     /**
      * Returns page metadata.
      * @return Metadata
@@ -61,30 +59,12 @@ class Page implements Identified, JsonInterface
     }
 
     /**
-     * Sets page metadata.
-     * @param Metadata $meta
-     */
-    public function setMeta ($meta)
-    {
-        $this->meta = $meta;
-    }
-
-    /**
      * Returns page body.
      * @return Body
      */
     public function getBody ()
     {
         return $this->body;
-    }
-
-    /**
-     * Sets page body/
-     * @param Body $body
-     */
-    public function setBody ($body)
-    {
-        $this->body = $body;
     }
 
 }

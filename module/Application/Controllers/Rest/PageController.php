@@ -14,30 +14,34 @@ class PageController extends BaseRestfulController
      */
     protected $provider;
 
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
+
     public function __construct (PageProvider $provider)
     {
         parent::__construct();
         $this->provider = $provider;
 
-//        sleep(2);
-
-        if (!$this->provider->exists(1)) {
-            $default = $this->provider->getDefault();
-            $this->provider->create($default);
-        }
+        $this->serializer = new Serializer();
     }
 
     public function getAction ()
     {
-        $id = $this->getRequest()->getParam('id');
-        $json = $this->provider->get($id);
 
-        $serializer = new Serializer();
-        
-        $page = $serializer->fromJson($json);
-        $data = $serializer->toJson($page);
+        if (!$this->provider->exists(1)) {
+            $json = $this->provider->getDefault();
+             $this->provider->create($json);
+        } else {
+            $id = $this->getRequest()->getParam('id');
+            $json = $this->provider->get($id);
+        }
 
-        return $this->dataResponse($data);
+        $page = $this->serializer->fromJson($json);
+        $json = $this->serializer->toJson($page);
+
+        return $this->dataResponse($json);
     }
 
     public function patchAction ()

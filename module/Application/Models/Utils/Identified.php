@@ -12,12 +12,5 @@ interface Identified {
      * @return string
      */
     public function getId();
-
-    /**
-     * Sets entity ID.
-     * @param string $id
-     * @return void
-     * @internal ID should be readonly, never use this method outside of serialization process.
-     */
-    public function setId($id);
+    
 }

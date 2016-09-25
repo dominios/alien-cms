@@ -3,12 +3,52 @@
 namespace Application\Models\Utils;
 
 use Closure;
+use InvalidArgumentException;
 
 /**
  * Converts entities between JSON and PHP objects representation.
  */
 class Serializer
 {
+
+    /**
+     * Accesses the objects property and can modify it.
+     * With this function, it's possible to access any property of the object, including private
+     * and protected.
+     *
+     * If only first <code>$object</code> parameter given, values of all its properties are returned.
+     *
+     * If also the second <code>$property</code> argument is given, ony value for that particular
+     * property is returned.
+     *
+     * If third argument is given, it will set property with name of <code>$property</code>
+     * to given <code>$value</code>.
+     *
+     * @param mixed $object any type of object.
+     * @param string $property [optional] particular property name to access.
+     * @param mixed $value [optional] value to set for the particular property.
+     * @throws InvalidArgumentException when first argument is not an object.
+     * @return mixed accessed property value.
+     */
+    private function accessProperty ($object, $property = null, $value = null)
+    {
+        if (!is_object($object)) {
+            throw new InvalidArgumentException("Only objects can be accessed.");
+        }
+        $reader = function & ($object, $property = null, $value = null) {
+            $value = &Closure::bind(function & () use ($property, $value) {
+                if ($value && property_exists($this, $property)) {
+                    $this->$property = $value;
+                    return $this->$property;
+                } else {
+                    return $property ? $this->$property : get_object_vars($this);
+                }
+            }, $object, $object)->__invoke();
+            return $value;
+        };
+
+        return $reader($object, $property, $value);
+    }
 
     /**
      * Converts object instance into JSON.
@@ -20,27 +60,18 @@ class Serializer
      */
     public function toJson (JsonInterface $object)
     {
-
-        $reader = function & ($object, $property = null) {
-            $value = & Closure::bind(function & () use ($property) {
-                return $property ? $this->$property : get_object_vars($this);
-            }, $object, $object)->__invoke();
-            return $value;
-        };
-
         $ret = [];
-        $props = array_keys($reader($object));
+        $props = array_keys($this->accessProperty($object));
 
         foreach ($props as $prop) {
-            $getter = "get" . ucfirst($prop);
-            $value = call_user_func([$object, $getter]);
+            $value = $this->accessProperty($object, $prop);
             if ($value instanceof JsonInterface) {
                 $ret[$prop] = $this->toJson($value);
             } else {
                 $ret[$prop] = $value;
             }
         }
-        
+
         return $ret;
     }
 
@@ -60,25 +91,25 @@ class Serializer
         // now we're assuming JSON is OK - no further error handling
 
         if (!is_array($json)) {
-            throw new \InvalidArgumentException("Cannot parse other objects than array.");
+            throw new InvalidArgumentException("Cannot parse other objects than array.");
         }
 
         $className = $json['type'];
-        $object = new $className;
+
+        $object = new $className();
 
         foreach ($json as $key => $value) {
-            $setter = "set" . ucfirst($key);
             if ($key === 'id' && $object instanceof Identified) {
-                $object->setId($value);
+                $this->accessProperty($object, 'id', $value);
             } else if (is_array($value)) {
                 $type = @$value['type'];
                 if ($type) {
-                    call_user_func([$object, $setter], $this->fromJson($value));
+                    $this->accessProperty($object, $key, $this->fromJson($value));
                 } else {
-                    call_user_func([$object, $setter], $value);
+                    $this->accessProperty($object, $key, $value);
                 }
             } else {
-                call_user_func([$object, $setter], $value);
+                $this->accessProperty($object, $key, $value);
             }
         }
 
