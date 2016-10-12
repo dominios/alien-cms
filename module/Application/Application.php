@@ -8,7 +8,6 @@ use Alien\Routing\HttpRequest;
 use Alien\Routing\Route;
 use Alien\Routing\Router;
 use Alien\Routing\Uri;
-use Tracy\Debugger;
 
 class Application extends \Alien\Application
 {
@@ -20,10 +19,6 @@ class Application extends \Alien\Application
 
     public function run()
     {
-
-        Debugger::enable();
-        Debugger::$strictMode = false;
-
         $this->router = $this->getServiceLocator()->get('Router');
 
         $uri = Uri::createFromString($this->getRequest()->getUri());

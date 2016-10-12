@@ -1,11 +1,15 @@
 <?php
 
 use Application\Application;
+use Tracy\Debugger;
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
 $loader->add('Application', implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'module']));
 
 try {
+
+    Debugger::enable();
+    Debugger::$strictMode = false;
 
     header("Content-Type: text/html; charset=UTF8");
 
