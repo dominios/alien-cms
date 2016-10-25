@@ -3,39 +3,19 @@
 return [
     'api' => [
         'route' => '/api',
-        'namespace' => '',
-        'action' => '',
         'childRoutes' => [
             'v1' => [
                 'route' => '/v1',
-                'namespace' => '',
-                'action' => '',
                 'childRoutes' => [
-                    'navs' => [
-                        'route' => '/navs[/:id][/:method]',
-                        'namespace' => '',
-                        'controller' => '\Application\Controllers\Rest\NavController',
-                        'action' => 'rest',
-                        'defaults' => [
-                            'method' => 'list',
-                        ]
-                    ],
-                    'texts' => [
-                        'route' => '/texts[/:id][/:method]',
-                        'namespace' => '',
-                        'controller' => '\Application\Controllers\Rest\TextController',
-                        'action' => 'rest',
-                        'defaults' => [
-                            'method' => 'list',
-                        ]
-                    ],
                     'pages' => [
-                        'route' => '/pages[/:id][/:method]',
-                        'namespace' => '',
+                        'route' => '/pages',
                         'controller' => '\Application\Controllers\Rest\PageController',
-                        'action' => 'rest',
-                        'defaults' => [
-                            'method' => 'list',
+                        'action' => 'list',
+                        'childRoutes' => [
+                            'id' => [
+                                'route' => '/id/:id',
+                                'action' => 'get'
+                            ]
                         ]
                     ]
                 ]

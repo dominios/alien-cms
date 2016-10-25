@@ -2,11 +2,12 @@
 
 namespace Application\Controllers\Rest;
 
+use Alien\Mvc\AbstractController;
 use Alien\Rest\BaseRestfulController;
 use Application\Models\Utils\Serializer;
 use Application\Providers\Page\PageProvider;
 
-class PageController extends BaseRestfulController
+class PageController extends RestController
 {
 
     /**
@@ -27,9 +28,8 @@ class PageController extends BaseRestfulController
         $this->serializer = new Serializer();
     }
 
-    public function getAction ()
+    public function getAction ($id)
     {
-
         if (!$this->provider->exists(1)) {
             $json = $this->provider->getDefault();
              $this->provider->create($json);
