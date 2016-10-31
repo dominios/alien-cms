@@ -1,61 +1,46 @@
 <div notifications="top right" class="cms-notifications"></div>
 
-<aside class="admin-panel" ng-cloak>
+<aside layout="column" layout-align="start none" ng-cloak>
 
-    <header class="row admin-heading">
-        <div class="col-xs-12">
-            <h1>ALiEN CMS
-                <small>v 1.0.0a</small>
-            </h1>
-            <loader/>
-        </div>
+    <header>
+        <h1 class="md-title">ALiEN CMS
+            <small>v 1.0.0a</small>
+        </h1>
+        <loader/>
     </header>
 
-    <section class="row admin-section user-profile">
-        <div class="col-xs-2 col-image">
-            <img src="/static/profile.jpg" alt="Profile Image" class="img-circle profile-image">
-        </div>
-        <div class="col-xs-5 col-name">
-            <strong>Admin Name</strong>
-            <br>Administrator
-        </div>
-        <div class="col-xs-5 col-buttons">
+    <login-status></login-status>
 
-            <div class="btn-group btn-group-lg no-shadow" role="group">
-                <button class="btn btn-link">
-                    <i class="fa fa-envelope-o text-muted"></i>
-                    <span class="label label-pill label-info label-badge">0</span>
-                </button>
-                <button class="btn btn-link">
-                    <i class="fa fa-bell-o active"></i>
-                    <span class="label label-pill label-danger label-badge">3</span>
-                </button>
-                <button class="btn btn-link">
-                    <i class="fa fa-sign-out"></i>
-                </button>
-            </div>
-
-        </div>
-    </section>
+    <!--<section>-->
+        <!--<md-card>-->
+            <!--<md-card-title>-->
+                <!--<md-card-title-text>-->
+                    <!--<span class="md-headline">User Name</span>-->
+                    <!--<span class="md-subhead">Administrator</span>-->
+                <!--</md-card-title-text>-->
+                <!--<md-card-title-media>-->
+                    <!--<div class="md-media-sm card-media">-->
+                        <!--<img src="/static/profile.jpg" alt="Profile Image" class="img-circle profile-image">-->
+                    <!--</div>-->
+                <!--</md-card-title-media>-->
+            <!--</md-card-title>-->
+            <!--<md-card-actions layout="row" layout-align="end center">-->
+                <!--<md-button>Messages</md-button>-->
+                <!--<md-button>Alerts</md-button>-->
+                <!--<md-button>Sign out</md-button>-->
+            <!--</md-card-actions>-->
+        <!--</md-card>-->
+    <!--</section>-->
 
     <page-settings></page-settings>
 
-    <section class="row admin-section global-settings">
-
-        <div class="col-xs-12">
-            <h2>Global Settings</h2>
-        </div>
-
-        <div class="col-xs-12">
-            <button class="btn btn-sm btn-primary">
-                <i class="fa fa-gears"></i> Show Settings
-            </button>
-            <button class="btn btn-sm btn-primary">
-                <i class="fa fa-question-circle"></i> Need Help?
-            </button>
-        </div>
-
-
+    <section>
+        <md-card>
+            <md-card-actions layout="row" layout-align="space-around center">
+                <md-button class="md-raised md-primary"><i class="fa fa-gears"></i> Show global settings</md-button>
+                <md-button class="md-raised md-primary"><i class="fa fa-question-circle"></i> Need Help?</md-button>
+            </md-card-actions>
+        </md-card>
     </section>
 
 </aside>

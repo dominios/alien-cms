@@ -12,8 +12,16 @@
         'ui.bootstrap',
         'AlienCms.navigation',
         'AlienCms.text',
-        'AlienCms.page'
+        'AlienCms.page',
+        'AlienCms.loginStatus'
     ]);
+
+    angular.module('AlienCms')
+        .config(function ($mdThemingProvider) {
+            $mdThemingProvider.theme('default')
+                .primaryPalette('teal')
+                .accentPalette('green');
+        });
 
     angular.module('AlienCms')
         .directive('ckEditor', [function () {

@@ -1,143 +1,93 @@
-<section class="row admin-section page-settings" ng-controller="PageCtrl as vm">
+<section ng-controller="PageCtrl as vm">
 
-    <header class="col-xs-12">
-        <h2>
-            Settings
-            <small ng-bind="vm.page.meta.name"></small>
-        </h2>
-    </header>
+    <md-card>
+        <md-card-header>
+            <md-card-header-text>
+                <h2>
+                    {{vm.page.meta.name}} <small>| Settings</small>
+                </h2>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content layout="column" layout-align="none none">
 
-    <div class="col-xs-12 page-description">
-        <p contenteditable ng-model="vm.page.meta.description" only-text="true"></p>
-    </div>
+            <md-input-container>
+                <label>Description</label>
+                <input type="text" ng-model="vm.page.meta.description">
+            </md-input-container>
 
-    <div class="col-xs-12 page-options">
+            <md-input-container>
+                <label>Link</label>
+                <input type="text" ng-model="vm.page.meta.url">
+            </md-input-container>
 
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-link"></i> Link</strong>
-            </div>
-            <div class="col-xs-3">
-                <span ng-bind="vm.page.meta.url"></span>
-            </div>
-            <div class="col-xs-4">
-                <a href="#"><i class="fa fa-fw fa-clone"></i></a>
-            </div>
-        </div>
+            <md-input-container>
+                <label>Status</label>
+                <md-select ng-model="vm.page.meta.status" placeholder="Status" class="md-no-underline">
+                    <md-option ng-repeat="status in vm.options.availableStatuses" ng-value="status">{{status}}</md-option>
+                </md-select>
+            </md-input-container>
 
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-info"></i> Status</strong>
-            </div>
-            <div class="col-xs-7">
+            <md-input-container>
+                <label>Created On</label>
+                <input type="text" ng-value="vm.page.meta.dateCreated | date: 'd.M.yyyy H:mm:ss'" disabled>
+            </md-input-container>
 
-                <div class="btn-group" uib-dropdown keyboard-nav>
-                    <button type="button" class="btn btn-sm btn-{{vm.options.statusClass}}-outline dropdown-toggle"
-                            data-toggle="status-dropdown" aria-haspopup="true" aria-expanded="false"
-                            uib-dropdown-toggle>
-                        {{vm.page.meta.status}}
-                    </button>
-                    <div class="dropdown-menu" id="status-dropdown" uib-dropdown-menu>
-                        <a href="#"
-                           class="dropdown-item"
-                           ng-repeat="status in vm.options.availableStatuses"
-                           ng-click="vm.setStatus(status);">
-                            {{status}}
-                        </a>
-                    </div>
-                </div>
+            <md-input-container>
+                <label>Last Modified</label>
+                <input type="text" ng-value="vm.page.meta.dateModified | date: 'd.M.yyyy H:mm:ss'" disabled>
+            </md-input-container>
 
-            </div>
-        </div>
+            <md-input-container>
+                <label>Language</label>
+                <input type="text" ng-value="'Not Supported'" disabled>
+            </md-input-container>
 
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-calendar"></i> Created</strong>
-            </div>
-            <div class="col-xs-7">
-                {{vm.page.meta.dateCreated | date: 'd.M.yyyy H:mm:ss'}}
-            </div>
-        </div>
+            <section>
+                <span class="md-caption">Labels</span>
+                <md-chips ng-model="vm.page.meta.tags" md-removable="true">
+                    <md-chip-template>
+                        <i class="fa fa-tag"></i> {{$chip.text}}
+                    </md-chip-template>
+                </md-chips>
+            </section>
 
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-calendar"></i> Last Update</strong>
-            </div>
-            <div class="col-xs-7">
-                {{vm.page.meta.dateModified | date: 'd.M.yyyy H:mm:ss'}}
-                <span ng-if="!vm.page.meta.dateModified">N/A</span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-globe"></i> Language</strong>
-            </div>
-            <div class="col-xs-7">
-                N/A
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-5">
-                <strong><i class="fa fa-fw fa-tags"></i> Labels</strong>
-            </div>
-            <div class="col-xs-7">
-                <tags-input ng-model="vm.page.meta.tags">
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-xs-12 margin-top-7" ng-if="vm.options.isHomePage">
-        <button class="btn btn-sm btn-success" disabled>
-            <i class="fa fa-check"></i> Is home page
-        </button>
-    </div>
-
-    <div class="col-xs-12 margin-top-7" ng-if="!vm.options.isHomePage">
-        <button class="btn btn-sm btn-primary">
-            <i class="fa fa-home"></i> Make <i>{{vm.page.meta.name}}</i> home page
-        </button>
-    </div>
-
-    <div class="col-xs-12 margin-top-7">
-
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-            <md-button class="md-raised" ng-click="vm.savePage();" ng-disabled="vm.options.isSaving">
+            <md-input-container layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised" ng-click="vm.savePage();" ng-disabled="vm.options.isSaving">
                 <span ng-if="vm.options.isSaving">
                     <i class="fa fa-spin fa-spinner"></i> Saving...
                 </span>
-                <span ng-if="!vm.options.isSaving">
+                    <span ng-if="!vm.options.isSaving">
                     <i class="fa fa-fw fa-save"></i> Save
                 </span>
-            </md-button>
-            <md-button class="md-raised" ng-click="vm.clonePage();" ng-disabled="vm.options.isCloning">
+                </md-button>
+                <md-button class="md-raised" ng-click="vm.clonePage();" ng-disabled="vm.options.isCloning">
                 <span ng-if="vm.options.isCloning">
                     <i class="fa fa-spin fa-spinner"></i> Cloning...
                 </span>
-                <span ng-if="!vm.options.isCloning">
+                    <span ng-if="!vm.options.isCloning">
                     <i class="fa fa-fw fa-copy"></i> Clone
                 </span>
-            </md-button>
-            <md-button class="md-raised" ng-click="vm.deletePage();" ng-if="!vm.options.isDeleted" ng-disabled="vm.options.isDeleting">
+                </md-button>
+                <md-button class="md-raised" ng-click="vm.deletePage();" ng-if="!vm.options.isDeleted" ng-disabled="vm.options.isDeleting">
                 <span ng-if="vm.options.isDeleting">
                     <i class="fa fa-spin fa-spinner"></i> Deleting...
                 </span>
-                <span ng-if="!vm.options.isCloning">
+                    <span ng-if="!vm.options.isCloning">
                     <i class="fa fa-fw fa-trash-o"></i> Delete
                 </span>
-            </md-button>
-            <md-button class="md-raised" ng-click="vm.restorePage();" ng-if="vm.options.isDeleted" ng-disabled="vm.options.isRestoring">
+                </md-button>
+                <md-button class="md-raised" ng-click="vm.restorePage();" ng-if="vm.options.isDeleted" ng-disabled="vm.options.isRestoring">
                 <span ng-if="vm.options.isRestoring">
                     <i class="fa fa-spin fa-spinner"></i> Restoring...
                 </span>
-                <span ng-if="!vm.options.isRestoring">
+                    <span ng-if="!vm.options.isRestoring">
                     <i class="fa fa-recycle"></i> Restore
                 </span>
-            </md-button>
-        </section>
+                </md-button>
+            </md-input-container>
 
-    </div>
+
+        </md-card-content>
+    </md-card>
 
 </section>
