@@ -2,19 +2,23 @@
     <md-card>
         <md-card-title>
             <md-card-title-text>
-                <span class="md-headline">User Name</span>
-                <span class="md-subhead">Administrator</span>
+                <span class="md-headline">{{vm.user.name}}</span>
+                <span class="md-subhead">{{vm.user.role}}</span>
             </md-card-title-text>
             <md-card-title-media>
                 <div class="md-media-sm card-media">
-                    <img src="/static/profile.jpg" alt="Profile Image" class="img-circle profile-image">
+                    <img src="/static/profile.jpg" alt="Profile Image" class="profile-image">
                 </div>
             </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-            <md-button>Messages</md-button>
-            <md-button>Alerts</md-button>
-            <md-button>Sign out</md-button>
+            <md-button>
+                <i class="fa fa-envelope-o"></i> {{vm.messages.count}} Messages</md-button>
+            <md-button>
+                <i class="fa fa-bell-o"></i> {{vm.alerts.count}} Alert</md-button>
+            <md-button>
+                <i class="fa fa-sign-out"></i> Sign out
+            </md-button>
         </md-card-actions>
     </md-card>
 </section>
