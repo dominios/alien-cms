@@ -14,15 +14,10 @@
 
         .controller('LoginStatusCtrl', LoginStatusController);
 
-    // LoginStatusController.$inject = [];
-    function LoginStatusController () {
+    LoginStatusController.$inject = ['User', 'UserApi', '$loader'];
+    function LoginStatusController (User, UserApi, $loader) {
 
         var vm = this;
-
-        vm.user = {
-            name: 'User Name',
-            role: 'Administrator'
-        };
 
         vm.messages = {
             count: 2
@@ -31,6 +26,16 @@
         vm.alerts = {
             count: 1
         };
+
+        activate();
+
+        function activate () {
+            var promise = UserApi.get({ id: 1 }).$promise;
+            $loader.addPromise(promise);
+            promise.then(function (user) {
+                vm.user = user;
+            });
+        }
 
     }
 

@@ -10,6 +10,7 @@
         'content-editable',
         'ngTagsInput',
         'ui.bootstrap',
+        'AlienCms.Models',
         'AlienCms.navigation',
         'AlienCms.text',
         'AlienCms.page',

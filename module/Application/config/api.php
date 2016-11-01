@@ -17,6 +17,17 @@ return [
                                 'action' => 'get'
                             ]
                         ]
+                    ],
+                    'users' => [
+                        'route' => '/users',
+                        'controller' => '\Application\Controllers\Rest\UserController',
+                        'action' => 'list',
+                        'childRoutes' => [
+                            'id' => [
+                                'route' => '/id/:id',
+                                'action' => 'get'
+                            ]
+                        ]
                     ]
                 ]
             ]

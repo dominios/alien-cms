@@ -63,6 +63,12 @@ return [
             $ctrl = new Application\Controllers\Rest\PageController($provider);
             $ctrl->setServiceLocator($sl);
             return $ctrl;
+        },
+
+        '\Application\Controllers\Rest\UserController' => function (\Alien\Di\ServiceLocator $sl) {
+            $ctrl = new Application\Controllers\Rest\UserController();
+            $ctrl->setServiceLocator($sl);
+            return $ctrl;
         }
     ]
 
