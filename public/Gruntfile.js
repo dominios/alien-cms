@@ -5,18 +5,6 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        // @todo rewrite to add also 3rd party scripts
-        // uglify: {
-        //     dist: {
-        //         options: {
-        //             beautify: true,
-        //             sourceMap: true
-        //         },
-        //         src: 'src/**/*.js',
-        //         dest: 'build/js/app.min.js'
-        //     }
-        // },
-
         sass: {
             dev: {
                 options: {
@@ -60,34 +48,13 @@ module.exports = function (grunt) {
         },
 
         copy: {
-            dist: {
-                files: [
-
-                ]
-            },
             libraries: {
                 files: [
                     /**
-                     *  3rd party JS & CSS
-                     *  Need to create folders .tmp/{n} to keep order in which are libraries loaded
-                     *  put files for same plugin under the same dir
+                     *  3rd party files which needs to be added to bundle
                      */
-                    { expand: true, flatten: true, dest: 'build/.tmp/1', src: ['node_modules/angular/angular.min.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/2', src: ['node_modules/angular-resource/angular-resource.min.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/3', src: ['node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/4', src: ['node_modules/ng-content-editable/dist/ng-content-editable.min.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.js'] },
-                    // { expand: true, flatten: true, dest: 'build/.tmp/5', src: ['node_modules/ng-tags-input/build/ng-tags-input.min.css'] },
                     { expand: true, flatten: true, dest: 'build/ckeditor', src: ['node_modules/ckeditor/*'] }, // ckeditor cannot be added to build
-                    { expand: true, flatten: true, dest: 'build/js', src: ['node_modules/bootstrap/dist/js/bootstrap.min.js'], filter: 'isFile' },
-
-                    // material design & its dependencies
-                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-aria/angular-aria.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-animate/angular-animate.js'] },
-                    { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-material/angular-material.js'] },
                     { expand: true, flatten: true, dest: 'build/.tmp/6', src: ['node_modules/angular-material/angular-material.css'] },
-
-
                     { expand: true, flatten: true, dest: 'static/fonts/', src: ['node_modules/font-awesome/fonts/*'], filter: 'isFile' }
                 ]
             }
@@ -98,15 +65,43 @@ module.exports = function (grunt) {
                 separator: ';\n'
             },
             dev: {
-                files : [
-                    {
-                        src: ['build/.tmp/**/*.js', 'src/**/*.js'],
-                        dest: 'build/js/app.min.js'
-                    }, {
-                        src: 'build/.tmp/**/*.css',
-                        dest: 'build/css/app.min.css'
-                    }
+                files : [{
+                    src: 'build/.tmp/**/*.css',
+                    dest: 'build/css/app.min.css'
+                }]
+            }
+        },
+
+        requirejs: {
+            options: {
+                paths: {
+                    'appFiles': './src/js'
+                },
+                removeCombined: true,
+                out: 'build/js/app.min.js',
+                optimize: 'none',
+                baseUrl: 'src/js',
+                name: 'main',
+                include: [
+                    '../../node_modules/requirejs/require.js',
+                    '../../node_modules/angular/angular.min.js',
+                    '../../node_modules/angular-resource/angular-resource.min.js',
+                    '../../node_modules/ng-content-editable/dist/ng-content-editable.min.js',
+                    '../../node_modules/angular-aria/angular-aria.js',
+                    '../../node_modules/angular-animate/angular-animate.js',
+                    '../../node_modules/angular-material/angular-material.js'
                 ]
+
+            },
+            dev:{
+                options:{
+                    optimize:'none'
+                }
+            },
+            release:{
+                options:{
+                    optimize:'uglify'
+                }
             }
         }
 
@@ -114,6 +109,7 @@ module.exports = function (grunt) {
 
     // Load the plugins that provides tasks.
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -125,10 +121,8 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['watch']);
 
     // build tasks
-    // @todo task which will copy static assets which won't be copied during watch script to save time
-    // @todo rewrite grunt.registerTask('build', ['clean:build', 'uglify', 'sass:build', 'cssmin', 'clean:temp', 'copy:dist']);
-    // grunt.registerTask('dev', ['clean:build', 'concat', 'sass', 'cssmin', 'clean:temp', 'copy:dist']);
-    grunt.registerTask('dev', ['clean:build', 'copy:libraries', 'sass:dev', 'concat:dev', 'clean:temp']);
+    // grunt.registerTask('dev', ['clean:build', 'copy:libraries', 'sass:dev', 'concat:dev', 'clean:temp']);
+    grunt.registerTask('dev', ['clean:build', 'requirejs:dev', 'copy:libraries', 'sass:dev', 'concat:dev', 'clean:temp']);
 
     // rename watch to watcher and initialize watch task which will build at start
     grunt.renameTask('watch', 'watcher');

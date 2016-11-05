@@ -1,17 +1,8 @@
-(function () {
-
+define([], function () {
     'use strict';
 
-    angular
-        .module('AlienCms.page')
-        .component('pageSettings', {
-            templateUrl: 'src/js/components/page/template.html'
-        })
-        .controller('PageCtrl', PageController);
-
-    PageController.$inject = ['$scope', '$notification', '$loader', 'PageApi'];
-
-    function PageController ($scope, $notification, $loader, PageApi) {
+    PageController.$inject = ['$loader', 'PageApi'];
+    function PageController ($loader, PageApi) {
 
         var vm = this;
         vm.page = null;
@@ -51,7 +42,7 @@
         }
 
         function clonePage () {
-            $notification.warning("Warning!", "This feature has not been implemented yet.");
+            // $notification.warning("Warning!", "This feature has not been implemented yet.");
         }
 
         function savePage () {
@@ -60,7 +51,7 @@
             var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
-                $notification.success("Success!", "Your changes has been saved.");
+                // $notification.success("Success!", "Your changes has been saved.");
                 vm.options.isSaving = false;
             });
         }
@@ -72,7 +63,7 @@
             var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
-                $notification.success("Success!", "Page has been deleted.");
+                // $notification.success("Success!", "Page has been deleted.");
                 vm.options.isDeleting = false;
                 reloadOptions();
             });
@@ -85,7 +76,7 @@
             var promise = PageApi.update(vm.page).$promise;
             $loader.addPromise(promise);
             promise.then(function () {
-                $notification.success("Success!", "Page has been restored.");
+                // $notification.success("Success!", "Page has been restored.");
                 vm.options.isRestoring = false;
                 reloadOptions();
             });
@@ -115,4 +106,6 @@
 
     }
 
-})();
+    return PageController;
+
+});

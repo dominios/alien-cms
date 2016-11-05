@@ -1,10 +1,10 @@
-(function (angular) {
+define([], function () {
 
     angular.module('loader', [])
 
         .provider('$loader', function () {
 
-            function Loader() {
+            function Loader () {
                 return {
 
                     queue: [],
@@ -48,4 +48,4 @@
                 };
             }]
         );
-})(angular);
+});

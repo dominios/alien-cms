@@ -1,21 +1,9 @@
-(function () {
-
+define([
+], function () {
     'use strict';
 
-    angular
-        .module('AlienCms.loginStatus')
-
-        .directive('loginStatus', function () {
-            return {
-                restrict: 'E',
-                templateUrl: 'src/js/components/loginStatus/template.html'
-            }
-        })
-
-        .controller('LoginStatusCtrl', LoginStatusController);
-
-    LoginStatusController.$inject = ['User', 'UserApi', '$loader'];
-    function LoginStatusController (User, UserApi, $loader) {
+    LoginStatusController.$inject = ['UserApi', '$loader'];
+    function LoginStatusController (UserApi, $loader) {
 
         var vm = this;
 
@@ -39,4 +27,5 @@
 
     }
 
-})();
+    return LoginStatusController;
+});

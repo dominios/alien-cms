@@ -1,10 +1,9 @@
-(function () {
-
+define([], function () {
     'use strict';
 
-    angular
-        .module('AlienCms.page')
-        .service('PageApi', PageApi);
+    // angular
+    //     .module('AlienCms.page')
+    //     .service('PageApi', PageApi);
 
     PageApi.$inject = ['$resource'];
     function PageApi ($resource) {
@@ -20,4 +19,6 @@
         });
     }
 
-})();
+    return PageApi;
+
+});

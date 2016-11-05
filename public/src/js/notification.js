@@ -1,3 +1,5 @@
+define([], function () {
+
 (function (factory) {
     'use strict';
 
@@ -335,3 +337,5 @@
     return module;
 
 }));
+
+});
