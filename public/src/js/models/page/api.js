@@ -1,17 +1,22 @@
 define([], function () {
     'use strict';
 
-    // angular
-    //     .module('AlienCms.page')
-    //     .service('PageApi', PageApi);
+    PageApi.$inject = ['$resource', 'Page'];
+    function PageApi ($resource, Page) {
 
-    PageApi.$inject = ['$resource'];
-    function PageApi ($resource) {
+        var Interceptors = {
+            response: function (response) {
+                var page = new Page();
+                page.setData(response.data.data);
+                return page;
+            }
+        };
+
         return $resource('api/v1/pages/id/:id', {
             id: '@id',
             method: '@method'
         }, {
-            get: { method: 'GET' },
+            get: { method: 'GET', interceptor: Interceptors, cache: true },
             list: { method: 'GET', url: 'api/v1/pages' },
             update: { method: 'PATCH' },
             create: { method: 'PUT' },

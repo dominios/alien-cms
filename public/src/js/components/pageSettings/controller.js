@@ -1,8 +1,8 @@
 define([], function () {
     'use strict';
 
-    PageController.$inject = ['$loader', 'PageApi'];
-    function PageController ($loader, PageApi) {
+    PageSettingsController.$inject = ['$loader', 'PageApi'];
+    function PageSettingsController ($loader, PageApi) {
 
         var vm = this;
         vm.page = null;
@@ -28,8 +28,8 @@ define([], function () {
         function activate () {
             var promise = PageApi.get({ id: 1 }).$promise;
             $loader.addPromise(promise);
-            promise.then(function (response) {
-                vm.page = response.data;
+            promise.then(function (page) {
+                vm.page = page;
                 reloadOptions();
             });
         }
@@ -106,6 +106,6 @@ define([], function () {
 
     }
 
-    return PageController;
+    return PageSettingsController;
 
 });

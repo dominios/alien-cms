@@ -3,9 +3,8 @@ define([
     './directives/ckeditor',
     './directives/loader',
     './models/models',
-    './components/page/page',
-    './components/loginStatus/loginStatus'
-], function (config, ckeditor, loader, Models, page, loginStatus) {
+    './components/components'
+], function (config, ckeditor, loader, models, components) {
     'use strict';
 
     var app = angular.module('AlienCms', [
@@ -13,9 +12,8 @@ define([
         'ngMaterial',
         'loader',
         'content-editable',
-        'AlienCms.Models',
-        'AlienCms.page',
-        'AlienCms.loginStatus'
+        'AlienCms.models',
+        'AlienCms.components'
     ]);
 
     app.config(config);

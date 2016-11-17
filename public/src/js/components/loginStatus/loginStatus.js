@@ -5,8 +5,8 @@ define([
     'use strict';
 
     angular
-        .module('AlienCms.loginStatus', [])
-        .directive('loginStatus', LoginStatusDirective)
+        .module('AlienCms.components.loginStatus', [])
+        .directive('acmsLoginStatus', LoginStatusDirective)
         .controller('LoginStatusCtrl', LoginStatusController)
     ;
 

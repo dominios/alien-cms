@@ -15,7 +15,7 @@ class PageProvider extends AbstractProvider
      * PageProvider constructor.
      * @param CRUDInterface $adapter
      */
-    public function __construct (CRUDInterface $adapter)
+    public function __construct(CRUDInterface $adapter)
     {
         parent::__construct($adapter);
     }
@@ -24,7 +24,7 @@ class PageProvider extends AbstractProvider
      * Returns default hard-coded page model with sample values in JSON format.
      * @return array
      */
-    public function getDefault ()
+    public function getDefault()
     {
         return [
             'id' => "1", // string unique ID,
@@ -60,17 +60,37 @@ class PageProvider extends AbstractProvider
             'body' => [
                 // components=> ID when referenced, otherwise full data models
                 'title' => "Home Page Title",
-                'heading' => [
-                    // example of 2 components inside 1 placeholder
-                    0 => [
-
-                    ],
-                    1 => [
-
-                    ]
-                ],
+                'heading' => [],
                 'main' => [
-
+                    'newsList' => [
+                        [
+                            'type' => '\Application\Models\News\Article',
+                            'meta' => [
+                                'type' => '\Application\Models\News\Metadata',
+                                'name' => 'Heading #1',
+                                'description' => 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.',
+                                'url' => '#'
+                            ]
+                        ],
+                        [
+                            'type' => '\Application\Models\News\Article',
+                            'meta' => [
+                                'type' => '\Application\Models\News\Metadata',
+                                'name' => 'Heading #2',
+                                'description' => 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.',
+                                'url' => '#'
+                            ]
+                        ],
+                        [
+                            'type' => '\Application\Models\News\Article',
+                            'meta' => [
+                                'type' => '\Application\Models\News\Metadata',
+                                'name' => 'Heading #3',
+                                'description' => 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.',
+                                'url' => '#'
+                            ]
+                        ],
+                    ]
                 ]
             ]
         ];

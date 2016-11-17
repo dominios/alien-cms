@@ -3,7 +3,7 @@ define([
     './api'
 ], function (UserFactory, UserApi) {
 
-    angular.module('AlienCms.Models.User', [])
+    angular.module('AlienCms.models.user', [])
         .factory('User', UserFactory)
         .service('UserApi', UserApi);
 
