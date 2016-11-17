@@ -10,11 +10,10 @@ define([
         activate();
 
         function activate () {
-            console.info('NEWS LIST CTRL ACTIVATED');
             var promise = PageApi.get({ id: 1 }).$promise;
             $loader.addPromise(promise);
-            promise.then(function (response) {
-                console.info(response);
+            promise.then(function (page) {
+                vm.articles = page.body.main.newsList;
             });
         }
 
