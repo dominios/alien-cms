@@ -9,8 +9,8 @@ define([
 
     var app = angular.module('AlienCms', [
         'ngResource',
-        'ngRoute',
         'ngMaterial',
+        'ui.router',
         'loader',
         'content-editable',
         'AlienCms.models',

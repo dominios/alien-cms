@@ -1,7 +1,7 @@
 define([], function () {
 
-    config.inject = ['$mdThemingProvider', '$locationProvider', '$routeProvider'];
-    function config ($mdThemingProvider, $locationProvider, $routeProvider) {
+    config.inject = ['$mdThemingProvider', '$locationProvider', '$stateProvider'];
+    function config ($mdThemingProvider, $locationProvider, $stateProvider) {
 
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
@@ -9,14 +9,18 @@ define([], function () {
 
         $locationProvider.hashPrefix('!');
 
-        $routeProvider
-            .when('/', {
-                template: '<acms-news-list></acms-news-list>'
+        $stateProvider
+            .state('home', {
+                url: '/',
+                title: 'Welcome!',
+                // template: '<acms-news-list></acms-news-list>'
+                template: '<h3>Home!</h3>'
             })
-            .when('/news/:id', {
+            .state('news', {
+                url: '/news/:id',
+                title: 'News List',
                 template: '<acms-news-detail></acms-news-detail>'
             })
-            .otherwise('/');
     }
 
     return config;
