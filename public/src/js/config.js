@@ -1,13 +1,15 @@
 define([], function () {
 
-    config.inject = ['$mdThemingProvider', '$locationProvider', '$stateProvider'];
-    function config ($mdThemingProvider, $locationProvider, $stateProvider) {
+    config.inject = ['$mdThemingProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider'];
+    function config ($mdThemingProvider, $locationProvider, $stateProvider, $urlRouterProvider) {
 
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('green');
 
         $locationProvider.hashPrefix('!');
+
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('home', {
