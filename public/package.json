@@ -1,13 +1,13 @@
 {
-  "name": "testing",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.hrml",
+  "name": "Alien CMS",
+  "version": "0.0.1",
+  "description": "Custom AngularJS/PHP CMS",
+  "main": "index.php",
   "scripts": {
     "build": "webpack --progress --bail --profile",
     "watch": "webpack --progress --colors --watch"
   },
-  "author": "",
+  "author": "Dominik Gersak",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.21.0",
