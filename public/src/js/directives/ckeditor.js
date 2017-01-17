@@ -1,27 +1,25 @@
-define([], function () {
+'use strict';
 
-    function CkEditor () {
-        return {
-            require: '?ngModel',
-            link: function ($scope, elm, attr, ngModel) {
+function CkEditor () {
+    return {
+        require: '?ngModel',
+        link: function ($scope, elm, attr, ngModel) {
 
-                CKEDITOR.disableAutoInline = true;
+            CKEDITOR.disableAutoInline = true;
 
-                var ck = CKEDITOR.inline(elm[0]);
+            var ck = CKEDITOR.inline(elm[0]);
 
-                ck.on('pasteState', function () {
-                    $scope.$apply(function () {
-                        ngModel.$setViewValue(ck.getData());
-                    });
+            ck.on('pasteState', function () {
+                $scope.$apply(function () {
+                    ngModel.$setViewValue(ck.getData());
                 });
+            });
 
-                ngModel.$render = function () {
-                    ck.setData(ngModel.$modelValue);
-                };
-            }
+            ngModel.$render = function () {
+                ck.setData(ngModel.$modelValue);
+            };
         }
     }
+}
 
-    return CkEditor;
-
-});
+export default CkEditor;

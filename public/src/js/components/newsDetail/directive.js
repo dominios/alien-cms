@@ -1,12 +1,10 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    function NewsDetailDirective () {
-        return {
-            restrict: 'E',
-            templateUrl: 'src/js/components/newsDetail/template.html'
-        }
+function NewsDetailDirective () {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/js/components/newsDetail/template.html'
     }
+}
 
-    return NewsDetailDirective;
-});
+export default NewsDetailDirective;

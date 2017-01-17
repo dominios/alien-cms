@@ -1,12 +1,10 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    function PageSettingsDirective () {
-        return {
-            restrict: 'E',
-            templateUrl: 'src/js/components/pageSettings/template.html'
-        }
+function PageSettingsDirective () {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/js/components/pageSettings/template.html'
     }
+}
 
-    return PageSettingsDirective;
-});
+export default PageSettingsDirective;

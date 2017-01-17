@@ -1,17 +1,17 @@
-define([], function () {
+'use strict';
 
-    config.inject = ['$mdThemingProvider', '$locationProvider', '$urlRouterProvider'];
-    function config ($mdThemingProvider, $locationProvider, $urlRouterProvider) {
+config.inject = ['$mdThemingProvider', '$locationProvider', '$urlRouterProvider'];
+function config ($mdThemingProvider, $locationProvider, $urlRouterProvider) {
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('teal')
-            .accentPalette('green');
+    $mdThemingProvider
+        .theme('default')
+        .primaryPalette('teal')
+        .accentPalette('green');
 
-        $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('!');
 
-        $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
-    }
+}
 
-    return config;
-});
+export default config;

@@ -29,18 +29,18 @@ class IndexController extends AbstractController
         $adminPanel = new SidePanel();
 
         /** @var PageProvider $pageProvider */
-        $serializer = new Serializer();
-        $pageProvider = $this->getServiceLocator()->get('\Application\Providers\Page\PageProvider');
-        $pageJson = $pageProvider->get(1);
-        $newsList = $pageJson['body']['main']['newsList'];
-        $articles = array_map(function ($item) use ($serializer) {
-            return $serializer->fromJson($item);
-        }, $newsList);
+//        $serializer = new Serializer();
+//        $pageProvider = $this->getServiceLocator()->get('\Application\Providers\Page\PageProvider');
+//        $pageJson = $pageProvider->get(1);
+//        $newsList = $pageJson['body']['main']['newsList'];
+//        $articles = array_map(function ($item) use ($serializer) {
+//            return $serializer->fromJson($item);
+//        }, $newsList);
 
-        $newsListWidget = new NewsList($articles);
+//        $newsListWidget = new NewsList($articles);
 
         $this->getView()->bindVariable('cms', $adminPanel);
-        $this->getView()->bindVariable('newsList', $newsListWidget);
+//        $this->getView()->bindVariable('newsList', $newsListWidget);
         $this->getResponse()->setContent($this->getView()->render());
     }
 

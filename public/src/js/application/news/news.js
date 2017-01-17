@@ -1,18 +1,21 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    angular
-        .module('application.news', [])
-        .config(config);
+import angular from 'angular';
 
-    config.inject = ['$stateProvider'];
-    function config ($stateProvider) {
-        $stateProvider
-            .state('news', {
-                url: '/news/:id',
-                title: 'News List',
-                templateUrl: 'src/js/application/news/news.tpl.html'
-            });
-    }
+const MODULE_NAME = 'application.news';
 
-});
+angular
+    .module(MODULE_NAME, [])
+    .config(config);
+
+config.inject = ['$stateProvider'];
+function config ($stateProvider) {
+    $stateProvider
+        .state('news', {
+            url: '/news/:id',
+            title: 'News List',
+            templateUrl: 'src/js/application/news/news.tpl.html'
+        });
+}
+
+export default MODULE_NAME;

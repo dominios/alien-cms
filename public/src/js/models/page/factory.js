@@ -1,20 +1,17 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    function PageFactory () {
+function PageFactory () {
 
-        function Page () {
-        }
-
-        Page.prototype = {
-            setData: function (data) {
-                angular.extend(this, data);
-            }
-        };
-
-        return Page;
+    function Page () {
     }
 
-    return PageFactory;
+    Page.prototype = {
+        setData: function (data) {
+            angular.extend(this, data);
+        }
+    };
 
-});
+    return Page;
+}
+
+export default PageFactory;

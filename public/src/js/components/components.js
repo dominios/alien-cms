@@ -1,17 +1,20 @@
-define([
-    './newsList/newsList',
-    './newsDetail/newsDetail',
-    './loginStatus/loginStatus',
-    './pageSettings/pageSettings'
-], function (newsList, newsDetail, loginStatus, pageSettings) {
-    'use strict';
+'use strict';
 
-    angular
-        .module('AlienCms.components', [
-            'AlienCms.components.newsList',
-            'AlienCms.components.newsDetail',
-            'AlienCms.components.loginStatus',
-            'AlienCms.components.pageSettings'
-        ])
-    ;
-});
+import angular from 'angular';
+import newsList from './newsList/newsList';
+import newsDetail from './newsDetail/newsDetail';
+import loginStatus from  './loginStatus/loginStatus';
+import pageSettings from './pageSettings/pageSettings';
+
+const MODULE_NAME = 'alienCms.components';
+
+angular
+    .module('alienCms.components', [
+        newsList,
+        newsDetail,
+        loginStatus,
+        pageSettings
+    ])
+;
+
+export default MODULE_NAME;

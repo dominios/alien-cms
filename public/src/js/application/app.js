@@ -1,9 +1,12 @@
-define([
-    './home/home',
-    './news/news'
-], function (home, news) {
-   'use strict';
+'use strict';
 
-    angular
-        .module('application', ['application.home', 'application.news']);
-});
+import angular from 'angular';
+import home from './home/home';
+import news from './news/news';
+
+const MODULE_NAME = 'application';
+
+angular
+    .module(MODULE_NAME, [home, news]);
+
+export default MODULE_NAME;

@@ -1,12 +1,10 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    function LoginStatusDirective () {
-        return {
-            restrict: 'E',
-            templateUrl: 'src/js/components/loginStatus/template.html'
-        }
+function LoginStatusDirective () {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/js/components/loginStatus/template.html'
     }
+}
 
-    return LoginStatusDirective;
-});
+export default LoginStatusDirective;

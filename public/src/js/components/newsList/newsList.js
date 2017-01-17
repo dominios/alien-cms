@@ -1,13 +1,15 @@
-define([
-    './directive',
-    './controller'
-], function (NewsListDirective, NewsListController) {
-    'use strict';
+'use strict';
 
-    angular
-        .module('AlienCms.components.newsList', [])
-        .directive('acmsNewsList', NewsListDirective)
-        .controller('newsListCtrl', NewsListController)
-    ;
+import angular from 'angular';
+import NewsListDirective from './directive';
+import NewsListController from './controller';
 
-});
+const MODULE_NAME = 'alienCms.components.newsList';
+
+angular
+    .module(MODULE_NAME, [])
+    .directive('acmsNewsList', NewsListDirective)
+    .controller('newsListCtrl', NewsListController)
+;
+
+export default MODULE_NAME;

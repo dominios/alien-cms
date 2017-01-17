@@ -1,18 +1,15 @@
-define([
-], function () {
-    'use strict';
+'use strict';
 
-    NewsDetailController.$inject = [];
-    function NewsDetailController () {
+NewsDetailController.$inject = [];
+function NewsDetailController () {
 
-        var vm = this;
+    var vm = this;
 
-        activate();
+    activate();
 
-        function activate () {
-        }
-
+    function activate () {
     }
 
-    return NewsDetailController;
-});
+}
+
+export default NewsDetailController;

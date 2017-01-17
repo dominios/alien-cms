@@ -1,23 +1,20 @@
-define([
-], function () {
-    'use strict';
+'use strict';
 
-    NewsListController.$inject = ['$loader', 'PageApi'];
-    function NewsListController ($loader, PageApi) {
+NewsListController.$inject = ['$loader', 'PageApi'];
+function NewsListController ($loader, PageApi) {
 
-        var vm = this;
+    var vm = this;
 
-        activate();
+    activate();
 
-        function activate () {
-            var promise = PageApi.get({ id: 1 }).$promise;
-            $loader.addPromise(promise);
-            promise.then(function (page) {
-                vm.articles = page.body.main.newsList;
-            });
-        }
-
+    function activate () {
+        var promise = PageApi.get({ id: 1 }).$promise;
+        $loader.addPromise(promise);
+        promise.then(function (page) {
+            vm.articles = page.body.main.newsList;
+        });
     }
 
-    return NewsListController;
-});
+}
+
+export default NewsListController;

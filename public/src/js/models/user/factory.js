@@ -1,22 +1,19 @@
-define([], function () {
-    'use strict';
+'use strict';
 
-    function UserFactory () {
+function UserFactory () {
 
-        function User (name, role) {
-            this.name = name;
-            this.role = role;
-        }
-
-        User.prototype = {
-            setData: function (data) {
-                angular.extend(this, data);
-            }
-        };
-
-        return User;
+    function User (name, role) {
+        this.name = name;
+        this.role = role;
     }
 
-    return UserFactory;
+    User.prototype = {
+        setData: function (data) {
+            angular.extend(this, data);
+        }
+    };
 
-});
+    return User;
+}
+
+export default UserFactory;

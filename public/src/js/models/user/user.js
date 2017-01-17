@@ -1,10 +1,13 @@
-define([
-    './factory',
-    './api'
-], function (UserFactory, UserApi) {
+import angular from 'angular';
+import UserFactory from './factory';
+import UserApi from './api';
 
-    angular.module('AlienCms.models.user', [])
-        .factory('User', UserFactory)
-        .service('UserApi', UserApi);
+'use strict';
 
-});
+const MODULE_NAME = 'alienCms.models.user';
+
+angular.module(MODULE_NAME, [])
+    .factory('User', UserFactory)
+    .service('UserApi', UserApi);
+
+export default MODULE_NAME;
